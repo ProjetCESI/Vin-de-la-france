@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VinWpf", "VinWpf\VinWpf.csproj", "{FCD6EC28-C7C1-4054-A6E8-7F5DCD8D23C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FCD6EC28-C7C1-4054-A6E8-7F5DCD8D23C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD6EC28-C7C1-4054-A6E8-7F5DCD8D23C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD6EC28-C7C1-4054-A6E8-7F5DCD8D23C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD6EC28-C7C1-4054-A6E8-7F5DCD8D23C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ACED9230-B96E-4534-9418-CF6B30A22EB5}
+	EndGlobalSection
+EndGlobal
