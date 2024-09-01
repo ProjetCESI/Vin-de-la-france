@@ -9,6 +9,7 @@
       Title="Liste_Articles">
 
     <Grid>
+        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <TextBlock Text="Page des Articles!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
     </Grid>
 </Page>

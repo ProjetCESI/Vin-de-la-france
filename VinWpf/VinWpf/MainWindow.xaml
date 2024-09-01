@@ -7,9 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Clients" Click="Button_Click_Clients" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,76,0,0"/>
-        <Button Content="Fournisseurs" Click="Button_Click_Fournisseurs" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,111,0,0"/>
-        <Button Content="Familles" Click="Button_Click_Familles" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,146,0,0"/>
-        <Button Content="Articles" Click="Button_Click_Articles" Width="200" Height="30" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,181,0,0"/>
+        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
     </Grid>
 </Window>
