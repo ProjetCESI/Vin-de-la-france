@@ -9,7 +9,12 @@
       Title="Liste_Clients">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31*"/>
+            <RowDefinition Height="19*"/>
+        </Grid.RowDefinitions>
         <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <TextBlock Text="Page des Clients!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <DataGrid x:Name="dataGridClients" HorizontalAlignment="Left" Height="200" Margin="10,40,0,0" VerticalAlignment="Top" Width="760"/>
+        <Button Content="Ajouter un client" Click="Button_Click_Add_Clients" Margin="334,10,334,126" Grid.Row="1"/>
     </Grid>
 </Page>
