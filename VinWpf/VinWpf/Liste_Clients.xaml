@@ -9,6 +9,7 @@
       Title="Liste_Clients">
 
     <Grid>
+        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <TextBlock Text="Page des Clients!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
     </Grid>
 </Page>

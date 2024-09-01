@@ -9,6 +9,7 @@
       Title="Liste_Familles">
 
     <Grid>
+        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <TextBlock Text="Page des Familles!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
     </Grid>
 </Page>

@@ -9,6 +9,7 @@
       Title="Liste_Fournisseurs">
 
     <Grid>
+        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
         <TextBlock Text="Page des Fournisseurs!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
     </Grid>
 </Page>
