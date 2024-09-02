@@ -110,5 +110,14 @@ namespace VinWpf
                 }
             }
         }
+        private void Button_Click_Edit_Client(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button editButton && editButton.CommandParameter is int clientId)
+            {
+                Edit_Clients editClientsPage = new Edit_Clients(clientId);
+                ((MainWindow)Application.Current.MainWindow).Content = editClientsPage;
+            }
+        }
+
     }
 }

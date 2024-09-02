@@ -77,5 +77,10 @@ namespace VinWpf
         {
 
         }
+
+        private void Button_Click_Clients(object sender, RoutedEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow).Content = new Liste_Clients();
+        }
     }
 }
