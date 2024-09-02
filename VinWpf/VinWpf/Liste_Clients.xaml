@@ -33,6 +33,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Ajouter un client" Click="Button_Click_Add_Clients" Margin="334,69,334,68" Grid.Row="1"/>
+        <Button Content="Ajouter un client" Click="Button_Click_Add_Clients" Margin="334,69,334,68" Grid.Row="1" Width="100" Height="30" MaxHeight="30" MaxWidth="100"/>
     </Grid>
 </Page>
