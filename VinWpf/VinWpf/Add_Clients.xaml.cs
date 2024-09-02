@@ -41,6 +41,20 @@ namespace VinWpf
                 return;
             }
 
+            if (!IsValidEmail(email))
+            {
+                statusTextBlock.Text = "Veuillez entrer une adresse e-mail valide.";
+                statusTextBlock.Foreground = Brushes.Red;
+                return;
+            }
+
+            if (!IsPhoneNumber(phone))
+            {
+                statusTextBlock.Text = "Veuillez entrer un numéro de téléphone valide (chiffres uniquement).";
+                statusTextBlock.Foreground = Brushes.Red;
+                return;
+            }
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -67,6 +81,25 @@ namespace VinWpf
                 }
             }
         }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsPhoneNumber(string number)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(number, @"^\d+$");
+        }
+
 
         private void Button_Click_Articles(object sender, RoutedEventArgs e)
         {
