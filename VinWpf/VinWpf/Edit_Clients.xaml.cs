@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
-using System.Xml.Linq;
+using System.Windows.Media;
 
 namespace VinWpf
 {
@@ -45,6 +45,28 @@ namespace VinWpf
 
         private void SaveChanges_Click(object sender, RoutedEventArgs e)
         {
+            string name = txtName.Text;
+            string email = txtEmail.Text;
+            string phone = txtPhone.Text;
+
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone))
+            {
+                MessageBox.Show("Veuillez remplir tous les champs.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Veuillez entrer une adresse e-mail valide.", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            if (!IsPhoneNumber(phone))
+            {
+                MessageBox.Show("Veuillez entrer un numéro de téléphone valide (chiffres uniquement).", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -53,9 +75,9 @@ namespace VinWpf
                     string updateQuery = "UPDATE Client SET Name = @Name, Email = @Email, Phone = @Phone WHERE Id = @ClientId";
                     SqlCommand cmd = new SqlCommand(updateQuery, conn);
                     cmd.Parameters.AddWithValue("@ClientId", clientId);
-                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
-                    cmd.Parameters.AddWithValue("@Phone", txtPhone.Text);
+                    cmd.Parameters.AddWithValue("@Name", name);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    cmd.Parameters.AddWithValue("@Phone", phone);
                     cmd.ExecuteNonQuery();
 
                     MessageBox.Show("Client mis à jour avec succès.");
@@ -63,10 +85,29 @@ namespace VinWpf
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de la mise à jour du client : {ex.Message}");
+                    MessageBox.Show($"Erreur lors de la mise à jour du client : {ex.Message}", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        private bool IsPhoneNumber(string number)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(number, @"^\d+$");
+        }
+
         private void Button_Click_Clients(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).Content = new Liste_Clients();
