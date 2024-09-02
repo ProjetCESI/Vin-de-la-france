@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -82,6 +82,33 @@ namespace VinWpf
         private void Button_Click_Add_Clients(object sender, RoutedEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow).Content = new Add_Clients();
+        }
+
+        private void Button_Click_Delete_Client(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button deleteButton && deleteButton.CommandParameter is int clientId)
+            {
+                var result = MessageBox.Show("Voulez vous vraiment supprimer ce client ?", "Confirmation de suppression", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (result == MessageBoxResult.Yes)
+                {
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        try
+                        {
+                            conn.Open();
+                            string deleteQuery = "DELETE FROM Client WHERE Id = @ClientId";
+                            SqlCommand cmd = new SqlCommand(deleteQuery, conn);
+                            cmd.Parameters.AddWithValue("@ClientId", clientId);
+                            cmd.ExecuteNonQuery();
+                            LoadClients();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show($"Erreur lors de la suppression du client : {ex.Message}");
+                        }
+                    }
+                }
+            }
         }
     }
 }
