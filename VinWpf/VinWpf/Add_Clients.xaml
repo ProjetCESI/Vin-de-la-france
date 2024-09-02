@@ -12,6 +12,7 @@
         <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
 
         <TextBlock Text="Créer un client" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-130,0,0" FontSize="24" Height="30"/>
+        <TextBlock x:Name="statusTextBlock" Foreground="Green" FontSize="14" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="320,293,0,0" Text=""/>
 
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Margin="10,240,0,0" VerticalAlignment="Top" Width="200"/>
         <TextBox x:Name="txtEmail" HorizontalAlignment="Left" Margin="220,240,0,0" VerticalAlignment="Top" Width="200"/>

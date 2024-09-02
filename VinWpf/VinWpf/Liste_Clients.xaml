@@ -15,7 +15,21 @@
         </Grid.RowDefinitions>
         <TextBlock Text="Liste des clients" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,-130,0,0" FontSize="24" Height="30"/>
         <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <DataGrid x:Name="dataGridClients" HorizontalAlignment="Center" Height="200" Margin="0,104,0,0" VerticalAlignment="Top" Width="760" Grid.RowSpan="2"/>
+        <DataGrid x:Name="dataGridClients" HorizontalAlignment="Center" Height="200" Margin="0,104,0,0" VerticalAlignment="Top" Width="760" Grid.RowSpan="2" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="Auto"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="Auto"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" Width="Auto"/>
+                <DataGridTemplateColumn Header="Actions" Width="Auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" Click="Button_Click_Delete_Client" CommandParameter="{Binding Id}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button Content="Ajouter un client" Click="Button_Click_Add_Clients" Margin="334,69,334,68" Grid.Row="1"/>
     </Grid>
 </Page>

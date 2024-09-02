@@ -36,7 +36,8 @@ namespace VinWpf
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(phone))
             {
-                MessageBox.Show("Veuillez remplir tous les champs.");
+                statusTextBlock.Text = "Veuillez remplir tous les champs.";
+                statusTextBlock.Foreground = Brushes.Red;
                 return;
             }
 
@@ -51,7 +52,9 @@ namespace VinWpf
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Phone", phone);
                     cmd.ExecuteNonQuery();
-                    MessageBox.Show("Client ajouté avec succès.");
+
+                    statusTextBlock.Text = "Client ajouté avec succès.";
+                    statusTextBlock.Foreground = Brushes.Green;
 
                     txtName.Text = string.Empty;
                     txtEmail.Text = string.Empty;
@@ -59,7 +62,8 @@ namespace VinWpf
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Erreur lors de l'ajout du client : {ex.Message}");
+                    statusTextBlock.Text = $"Erreur lors de l'ajout du client : {ex.Message}";
+                    statusTextBlock.Foreground = Brushes.Red;
                 }
             }
         }
