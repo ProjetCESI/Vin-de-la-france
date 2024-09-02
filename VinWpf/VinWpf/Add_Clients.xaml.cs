@@ -68,5 +68,10 @@ namespace VinWpf
         {
             ((MainWindow)Application.Current.MainWindow).Content = new Add_Clients();
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
