@@ -22,6 +22,7 @@
         <TextBlock Text="Email" HorizontalAlignment="Left" Margin="220,220,0,0" VerticalAlignment="Top"/>
         <TextBlock Text="Téléphone" HorizontalAlignment="Left" Margin="430,220,0,0" VerticalAlignment="Top"/>
 
+        <Button Content="Retour" Click="Button_Click_Clients" Width="70" Margin="0,150,0,0" Height="20"/>
         <Button Content="Ajouter Client" HorizontalAlignment="Left" Margin="640,240,0,0" VerticalAlignment="Top" Width="120" Click="AddClient_Click"/>
     </Grid>
 </Page>
