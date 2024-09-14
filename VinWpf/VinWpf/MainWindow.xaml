@@ -7,7 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <local:NavBar HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-        <TextBlock Text="Page d'accueil!" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
+        <TabControl>
+            <TabItem Header="Clients">
+                <Frame Source="/Views/Clients.xaml"/>
+            </TabItem>
+            <TabItem Header="Fournisseurs">
+                <Frame Source="/Views/Fournisseurs.xaml"/>
+            </TabItem>
+            <TabItem Header="Familles">
+                <Frame Source="/Views/Familles.xaml"/>
+            </TabItem>
+            <TabItem Header="Articles">
+                <Frame Source="/Views/Articles.xaml"/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

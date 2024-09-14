@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace VinWpf
+namespace VinWpf.Views
 {
     /// <summary>
-    /// Logique d'interaction pour Fournisseurs.xaml
+    /// Logique d'interaction pour Articles.xaml
     /// </summary>
-    public partial class Liste_Fournisseurs : Page
+    public partial class Articles : Page
     {
-        public Liste_Fournisseurs()
+        public Articles()
         {
             InitializeComponent();
         }
