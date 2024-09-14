@@ -218,8 +218,37 @@ namespace VinWpf.Views
             TextBoxClientEmail.Text = "";
             AddClientMessage.Text = "";
             AddEditClientText.Text = "Ajouter un client";
+            DataGridClientMessage.Text = "";
             UpdateClientButton.Visibility = Visibility.Collapsed;
             AddClientButton.Visibility = Visibility.Visible;
+            CancelUpdateClientButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void DeleteClient_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Voulez-vous vraiment supprimer ce client ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                var clientId = (int)((Button)sender).Tag;
+
+                using (PhishingContext context = new PhishingContext())
+                {
+                    var clientToDelete = context.ClientsClass.FirstOrDefault(c => c.Id == clientId);   
+                    context.ClientsClass.Remove(clientToDelete);
+                    context.SaveChanges();
+                    LoadClients();
+                    DataGridClientMessage.Foreground = new SolidColorBrush(Colors.Green);
+                    DataGridClientMessage.Text = "Le client a été supprimé avec succès.";
+                    TextBoxClientName.Text = "";
+                    TextBoxClientAddress.Text = "";
+                    TextBoxClientPhone.Text = "";
+                    TextBoxClientEmail.Text = "";
+                    AddClientMessage.Text = "";
+                    AddEditClientText.Text = "Ajouter un client";
+                    UpdateClientButton.Visibility = Visibility.Collapsed;
+                    AddClientButton.Visibility = Visibility.Visible;
+                    CancelUpdateClientButton.Visibility = Visibility.Collapsed;
+                }
+            }
         }
     }
 }

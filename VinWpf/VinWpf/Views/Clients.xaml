@@ -25,7 +25,10 @@
                     <DataGridTemplateColumn Header="Action" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Modifier" Click="EditClient_Click" Tag="{Binding Id}" />   
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Modifier" Click="EditClient_Click" Tag="{Binding Id}" />
+                                    <Button Content="Supprimer" Click="DeleteClient_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
+                                </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
