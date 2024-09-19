@@ -50,6 +50,23 @@ namespace VinWpf.Migrations
                     b.ToTable("ClientsClass");
                 });
 
+            modelBuilder.Entity("VinWpf.DataSet.FamilleClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FamilleClass");
+                });
+
             modelBuilder.Entity("VinWpf.DataSet.FournisseursClass", b =>
                 {
                     b.Property<int>("Id")

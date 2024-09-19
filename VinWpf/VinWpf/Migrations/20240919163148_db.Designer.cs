@@ -11,8 +11,8 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(PhishingContext))]
-    [Migration("20240919061525_db2")]
-    partial class db2
+    [Migration("20240919163148_db")]
+    partial class db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,23 @@ namespace VinWpf.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ClientsClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.FamilleClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FamilleClass");
                 });
 
             modelBuilder.Entity("VinWpf.DataSet.FournisseursClass", b =>
