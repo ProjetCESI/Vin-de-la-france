@@ -11,7 +11,7 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(PhishingContext))]
-    [Migration("20240919163148_db")]
+    [Migration("20240919190804_db")]
     partial class db
     {
         /// <inheritdoc />
@@ -23,6 +23,37 @@ namespace VinWpf.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("VinWpf.DataSet.ArticleClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FamilleClassId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MinimumThreshold")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("QuantityStock")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UnitPrice")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FamilleClassId");
+
+                    b.ToTable("ArticleClass");
+                });
 
             modelBuilder.Entity("VinWpf.DataSet.ClientsClass", b =>
                 {
@@ -97,6 +128,17 @@ namespace VinWpf.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FournisseursClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.ArticleClass", b =>
+                {
+                    b.HasOne("VinWpf.DataSet.FamilleClass", "FamilleClass")
+                        .WithMany()
+                        .HasForeignKey("FamilleClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FamilleClass");
                 });
 #pragma warning restore 612, 618
         }

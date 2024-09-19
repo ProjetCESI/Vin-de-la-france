@@ -19,7 +19,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                     <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
-                    <DataGridTemplateColumn Header="Action" Width="Auto">
+                    <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
