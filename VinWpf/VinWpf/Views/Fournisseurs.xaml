@@ -22,7 +22,7 @@
                     <DataGridTextColumn Header="Adresse" Binding="{Binding Address}" Width="*"/>
                     <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" Width="*"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
-                    <DataGridTemplateColumn Header="Action" Width="Auto">
+                    <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">

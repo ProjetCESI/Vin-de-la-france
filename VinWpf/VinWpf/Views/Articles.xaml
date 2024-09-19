@@ -6,9 +6,61 @@
       xmlns:local="clr-namespace:VinWpf.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="Articles">
+      Title="Articles"
+      Loaded="ArticleLoadedPage">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Margin="0,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Liste des articles</TextBlock>
+            <DataGrid x:Name="ArticlesDataGrid" ItemsSource="{Binding ArticlesList}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="#efefef">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding UnitPrice}" Width="*"/>
+                    <DataGridTextColumn Header="Quantité Stock" Binding="{Binding QuantityStock}" Width="*"/>
+                    <DataGridTextColumn Header="Seuil Minimum" Binding="{Binding MinimumThreshold}" Width="*"/>
+                    <DataGridTextColumn Header="Famille" Binding="{Binding FamilleClass.Name}" Width="*"/>
+                    <DataGridTemplateColumn Header="Action" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Modifier" Click="EditArticle_Click" Tag="{Binding Id}" />
+                                    <Button Content="Supprimer" Click="DeleteArticle_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock x:Name="DataGridArticlesMessage" Text="" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock x:Name="AddEditArticlesText" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Créer un article</TextBlock>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Nom:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxArticlesName" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Prix Unitaire:</TextBlock>
+            <TextBox PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" x:Name="TextBoxArticlesUnitPrice" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Quantité Stock:</TextBlock>
+            <TextBox PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" x:Name="TextBoxArticlesQuantityStock" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Seuil Minimum:</TextBlock>
+            <TextBox PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" x:Name="TextBoxArticlesMinimumThreshold" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Famille:</TextBlock>
+            <ComboBox x:Name="ComboBoxArticlesFamilleID" Width="200" Height="20"/>
+
+            <Button Content="Ajouter" Width="100" x:Name="AddArticlesButton" Click="AddArticles_Click" Margin="5"/>
+            <Button Visibility="Collapsed" Content="Modifier" Width="100" x:Name="UpdateArticlesButton" Click="UpdateArticle_Click" Margin="5"/>
+            <Button Visibility="Collapsed" Content="Annuler" Width="100" x:Name="CancelUpdateArticlesButton" Click="CancelUpdateArticle_Click" Margin="5"/>
+            <TextBlock x:Name="AddArticlesMessage" Text="" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
