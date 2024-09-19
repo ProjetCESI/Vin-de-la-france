@@ -9,6 +9,53 @@
       Title="Fournisseurs">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Margin="10">
+            <TextBlock Margin="0,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Liste des fournisseurs</TextBlock>
+            <DataGrid x:Name="FournisseursDataGrid" ItemsSource="{Binding FournisseursList}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="#efefef">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
+                    <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Adresse" Binding="{Binding Address}" Width="*"/>
+                    <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTemplateColumn Header="Action" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Modifier" Click="EditFournisseurs_Click" Tag="{Binding Id}" />
+                                    <Button Content="Supprimer" Click="DeleteFournisseurs_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock x:Name="DataGridFournisseursMessage" Text="" Margin="0,20,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock x:Name="AddEditFournisseursText" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Créer un Fournisseur</TextBlock>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Nom:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxFournisseursName" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Adresse:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxFournisseursAddress" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Téléphone:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxFournisseursPhone" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Email:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxFournisseursEmail" Width="200" Height="20"/>
+
+            <Button Content="Ajouter" Width="100" x:Name="AddFournisseursButton" Click="AddFournisseurs_Click" Margin="5"/>
+            <Button Visibility="Collapsed" Content="Modifier" Width="100" x:Name="UpdateFournisseursButton" Click="UpdateFournisseurs_Click" Margin="5"/>
+            <Button Visibility="Collapsed" Content="Annuler" Width="100" x:Name="CancelUpdateFournisseursButton" Click="CancelUpdateFournisseurs_Click" Margin="5"/>
+            <TextBlock x:Name="AddFournisseursMessage" Text="" Margin="5" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18"></TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
