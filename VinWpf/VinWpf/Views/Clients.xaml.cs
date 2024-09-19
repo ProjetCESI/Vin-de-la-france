@@ -127,6 +127,7 @@ namespace VinWpf.Views
             AddClientButton.Visibility = Visibility.Collapsed;
             CancelUpdateClientButton.Visibility = Visibility.Visible;
         }
+
         private void UpdateClient_Click(object sender, RoutedEventArgs e)
         {
             using (PhishingContext context = new PhishingContext())

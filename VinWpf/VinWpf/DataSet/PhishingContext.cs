@@ -17,5 +17,6 @@ namespace VinWpf.DataSet
         }
 
         public DbSet<ClientsClass> ClientsClass { get; set; }
+        public DbSet<FournisseursClass> FournisseursClass { get; set; }
     }
 }
