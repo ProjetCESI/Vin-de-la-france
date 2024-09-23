@@ -19,6 +19,7 @@ namespace VinWpf
         public MainWindow()
         {
             InitializeComponent();
+            this.WindowState = WindowState.Maximized;
         }
     }
 }

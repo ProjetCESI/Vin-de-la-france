@@ -14,9 +14,15 @@ namespace VinWpf.DataSet
         public int UnitPrice { get; set; }
         public int QuantityStock { get; set; }
         public int MinimumThreshold { get; set; }
+        public Guid Reference { get; set; }
+
 
         [ForeignKey("FamilleClass")]
         public int FamilleClassId { get; set; }
         public virtual FamilleClass FamilleClass { get; set; }
+
+        [ForeignKey("FournisseursClass")]
+        public int FournisseursClassId { get; set; }
+        public virtual FournisseursClass FournisseursClass { get; set; }
     }
 }
