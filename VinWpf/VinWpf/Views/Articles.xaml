@@ -18,12 +18,12 @@
             <TextBlock Margin="0,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Liste des articles</TextBlock>
             <DataGrid x:Name="ArticlesDataGrid" ItemsSource="{Binding ArticlesList}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="#efefef">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                     <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
                     <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding UnitPrice}" Width="*"/>
                     <DataGridTextColumn Header="Quantité Stock" Binding="{Binding QuantityStock}" Width="*"/>
                     <DataGridTextColumn Header="Seuil Minimum" Binding="{Binding MinimumThreshold}" Width="*"/>
                     <DataGridTextColumn Header="Famille" Binding="{Binding FamilleClass.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Fournisseur" Binding="{Binding FournisseursClass.Name}" Width="*"/>
                     <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -56,6 +56,9 @@
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Famille:</TextBlock>
             <ComboBox x:Name="ComboBoxArticlesFamilleID" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Fournisseur:</TextBlock>
+            <ComboBox x:Name="ComboBoxArticlesFournisseurID" Width="200" Height="20"/>
 
             <Button Content="Ajouter" Width="100" x:Name="AddArticlesButton" Click="AddArticles_Click" Margin="5"/>
             <Button Visibility="Collapsed" Content="Modifier" Width="100" x:Name="UpdateArticlesButton" Click="UpdateArticle_Click" Margin="5"/>

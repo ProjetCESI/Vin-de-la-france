@@ -17,7 +17,6 @@
             <TextBlock Margin="0,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Liste des Familles</TextBlock>
             <DataGrid x:Name="FamillesDataGrid" ItemsSource="{Binding FamillesList}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="#efefef">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                     <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
                     <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>

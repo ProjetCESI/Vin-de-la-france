@@ -14,6 +14,8 @@ namespace VinWpf.Views
     {
         public ObservableCollection<ArticleClass> ArticlesList { get; set; }
 
+        public ObservableCollection<FournisseursClass> fournisseursClass { get; set; }
+
         private ArticleClass editArticle;
         public ObservableCollection<FamilleClass> FamilleClass { get; set; }
         public Articles()
@@ -21,6 +23,7 @@ namespace VinWpf.Views
             InitializeComponent();
             ArticlesList = new ObservableCollection<ArticleClass>();
             FamilleClass = new ObservableCollection<FamilleClass>();
+            fournisseursClass = new ObservableCollection<FournisseursClass>();
             this.DataContext = this;
         }
 
@@ -28,6 +31,7 @@ namespace VinWpf.Views
         {
             LoadArticles();
             LoadComboBoxArticlesFamilleID();
+            LoadComboboxFournisseurID();
         }
 
         private void LoadArticles()
@@ -36,6 +40,7 @@ namespace VinWpf.Views
             {
                 var articles = context.ArticleClass
                                       .Include(a => a.FamilleClass)
+                                      .Include(a => a.FournisseursClass)
                                       .ToList();
                 ArticlesList.Clear();
                 foreach (var article in articles)
@@ -44,7 +49,6 @@ namespace VinWpf.Views
                 }
             }
         }
-
 
         private void LoadComboBoxArticlesFamilleID()
         {
@@ -74,6 +78,33 @@ namespace VinWpf.Views
             }
         }
 
+        private void LoadComboboxFournisseurID()
+        {
+            using (PhishingContext context = new PhishingContext())
+            {
+                List<FournisseursClass> fournisseursList = context.FournisseursClass.ToList();
+                fournisseursClass.Clear();
+
+                FournisseursClass allFournisseurs = new FournisseursClass
+                {
+                    Id = -999,
+                    Name = "Tous les fournisseurs"
+                };
+
+                fournisseursClass.Add(allFournisseurs);
+
+                foreach (FournisseursClass fournisseur in fournisseursList)
+                {
+                    fournisseursClass.Add(fournisseur);
+                }
+
+                ComboBoxArticlesFournisseurID.ItemsSource = fournisseursClass;
+                ComboBoxArticlesFournisseurID.DisplayMemberPath = "Name";
+                ComboBoxArticlesFournisseurID.SelectedValuePath = "Id";
+                ComboBoxArticlesFournisseurID.SelectedValue = allFournisseurs.Id;
+            }
+        }
+
         private void AddArticles_Click(object sender, RoutedEventArgs e)
         {
             if (ValidateArticleInput())
@@ -92,7 +123,9 @@ namespace VinWpf.Views
                         UnitPrice = int.Parse(TextBoxArticlesUnitPrice.Text),
                         QuantityStock = int.Parse(TextBoxArticlesQuantityStock.Text),
                         MinimumThreshold = int.Parse(TextBoxArticlesMinimumThreshold.Text),
-                        FamilleClassId = (int)ComboBoxArticlesFamilleID.SelectedValue
+                        FamilleClassId = (int)ComboBoxArticlesFamilleID.SelectedValue,
+                        Reference = Guid.NewGuid(),
+                        FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue
                     };
 
                     context.ArticleClass.Add(newArticle);
@@ -100,6 +133,7 @@ namespace VinWpf.Views
                     LoadArticles();
                     ClearInputFields();
                     ShowMessage(AddArticlesMessage, "L'article a été ajouté avec succès.", Colors.Green);
+                    DataGridArticlesMessage.Text = "";
                 }
             }
         }
@@ -109,6 +143,8 @@ namespace VinWpf.Views
             editArticle = ((Button)sender).DataContext as ArticleClass;
             FillInputFieldsForEditing(editArticle);
             ShowEditMode();
+            DataGridArticlesMessage.Text = "";
+            AddArticlesMessage.Text = "";
         }
 
         private void UpdateArticle_Click(object sender, RoutedEventArgs e)
@@ -126,12 +162,14 @@ namespace VinWpf.Views
                         articleToUpdate.QuantityStock = int.Parse(TextBoxArticlesQuantityStock.Text);
                         articleToUpdate.MinimumThreshold = int.Parse(TextBoxArticlesMinimumThreshold.Text);
                         articleToUpdate.FamilleClassId = (int)ComboBoxArticlesFamilleID.SelectedValue;
+                        articleToUpdate.FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue;
 
                         context.SaveChanges();
                         LoadArticles();
                         ClearInputFields();
                         ShowMessage(AddArticlesMessage, "L'article a été modifié avec succès.", Colors.Green);
                         ShowAddMode();
+                        DataGridArticlesMessage.Text = "";
                     }
                 }
             }
@@ -152,6 +190,7 @@ namespace VinWpf.Views
                         context.SaveChanges();
                         LoadArticles();
                         ShowMessage(DataGridArticlesMessage, "L'article a été supprimé avec succès.", Colors.Green);
+                        AddArticlesMessage.Text = "";
                     }
                 }
             }
@@ -161,6 +200,8 @@ namespace VinWpf.Views
         {
             ClearInputFields();
             ShowAddMode();
+            AddArticlesMessage.Text = "";
+            DataGridArticlesMessage.Text = "";
         }
 
         private void FillInputFieldsForEditing(ArticleClass article)
@@ -170,6 +211,7 @@ namespace VinWpf.Views
             TextBoxArticlesQuantityStock.Text = article.QuantityStock.ToString();
             TextBoxArticlesMinimumThreshold.Text = article.MinimumThreshold.ToString();
             ComboBoxArticlesFamilleID.SelectedValue = article.FamilleClassId;
+            ComboBoxArticlesFournisseurID.SelectedValue = article.FournisseursClassId;
         }
 
         private void ClearInputFields()
@@ -179,6 +221,7 @@ namespace VinWpf.Views
             TextBoxArticlesQuantityStock.Text = "";
             TextBoxArticlesMinimumThreshold.Text = "";
             ComboBoxArticlesFamilleID.SelectedIndex = -1;
+            ComboBoxArticlesFournisseurID.SelectedIndex = -1;
         }
 
         private void ShowEditMode()
@@ -209,7 +252,8 @@ namespace VinWpf.Views
                 string.IsNullOrWhiteSpace(TextBoxArticlesUnitPrice.Text) ||
                 string.IsNullOrWhiteSpace(TextBoxArticlesQuantityStock.Text) ||
                 string.IsNullOrWhiteSpace(TextBoxArticlesMinimumThreshold.Text) ||
-                ComboBoxArticlesFamilleID.SelectedIndex == -1)
+                ComboBoxArticlesFournisseurID.SelectedIndex == 0 ||
+                ComboBoxArticlesFamilleID.SelectedIndex == 0)
             {
                 ShowMessage(AddArticlesMessage, "Veuillez remplir tous les champs.", Colors.Red);
                 return false;

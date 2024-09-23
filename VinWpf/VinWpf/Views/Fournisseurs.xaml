@@ -17,7 +17,6 @@
             <TextBlock Margin="0,0,0,20" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="18">Liste des fournisseurs</TextBlock>
             <DataGrid x:Name="FournisseursDataGrid" ItemsSource="{Binding FournisseursList}" AutoGenerateColumns="False" ColumnWidth="*" CanUserAddRows="False" IsReadOnly="True" AlternatingRowBackground="#efefef">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*"/>
                     <DataGridTextColumn Header="Nom" Binding="{Binding Name}" Width="*"/>
                     <DataGridTextColumn Header="Adresse" Binding="{Binding Address}" Width="*"/>
                     <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" Width="*"/>

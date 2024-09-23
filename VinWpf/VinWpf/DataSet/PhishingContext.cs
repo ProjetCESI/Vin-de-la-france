@@ -20,5 +20,7 @@ namespace VinWpf.DataSet
         public DbSet<FournisseursClass> FournisseursClass { get; set; }
         public DbSet<FamilleClass> FamilleClass { get; set; }
         public DbSet<ArticleClass> ArticleClass { get; set; }
+        public DbSet<CommandeClientsClass> CommandeClientsClass { get; set; }
+        public DbSet<CommandeFournisseurClass> CommandeFournisseurClass { get; set; }
     }
 }
