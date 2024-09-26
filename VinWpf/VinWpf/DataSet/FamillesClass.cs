@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VinWpf.DataSet
 {
-    public class FamilleClass
+    public class FamillesClass
     {
         public int Id { get; set; }
         public string Name { get; set; }

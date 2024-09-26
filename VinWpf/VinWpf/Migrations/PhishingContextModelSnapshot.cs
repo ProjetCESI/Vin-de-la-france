@@ -22,7 +22,7 @@ namespace VinWpf.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("VinWpf.DataSet.ArticleClass", b =>
+            modelBuilder.Entity("VinWpf.DataSet.ArticlesClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,7 +30,7 @@ namespace VinWpf.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("FamilleClassId")
+                    b.Property<int>("FamillesClassId")
                         .HasColumnType("integer");
 
                     b.Property<int>("FournisseursClassId")
@@ -54,11 +54,11 @@ namespace VinWpf.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FamilleClassId");
+                    b.HasIndex("FamillesClassId");
 
                     b.HasIndex("FournisseursClassId");
 
-                    b.ToTable("ArticleClass");
+                    b.ToTable("ArticlesClass");
                 });
 
             modelBuilder.Entity("VinWpf.DataSet.ClientsClass", b =>
@@ -98,31 +98,24 @@ namespace VinWpf.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticleClassId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("ClientsClassId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("PrixCommande")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Quantite")
-                        .HasColumnType("integer");
+                    b.Property<string>("Statut")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ArticleClassId");
 
                     b.HasIndex("ClientsClassId");
 
                     b.ToTable("CommandeClientsClass");
                 });
 
-            modelBuilder.Entity("VinWpf.DataSet.CommandeFournisseurClass", b =>
+            modelBuilder.Entity("VinWpf.DataSet.CommandeFournisseursClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,23 +123,24 @@ namespace VinWpf.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ArticleClassId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Quantite")
+                    b.Property<int>("FournisseursClassId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Statut")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleClassId");
+                    b.HasIndex("FournisseursClassId");
 
-                    b.ToTable("CommandeFournisseurClass");
+                    b.ToTable("CommandeFournisseursClass");
                 });
 
-            modelBuilder.Entity("VinWpf.DataSet.FamilleClass", b =>
+            modelBuilder.Entity("VinWpf.DataSet.FamillesClass", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -160,7 +154,7 @@ namespace VinWpf.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FamilleClass");
+                    b.ToTable("FamillesClass");
                 });
 
             modelBuilder.Entity("VinWpf.DataSet.FournisseursClass", b =>
@@ -192,11 +186,69 @@ namespace VinWpf.Migrations
                     b.ToTable("FournisseursClass");
                 });
 
-            modelBuilder.Entity("VinWpf.DataSet.ArticleClass", b =>
+            modelBuilder.Entity("VinWpf.DataSet.LigneCommandeClientsClass", b =>
                 {
-                    b.HasOne("VinWpf.DataSet.FamilleClass", "FamilleClass")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticlesClassId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CommandeClientsClassId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PrixUnitaire")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantite")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticlesClassId");
+
+                    b.HasIndex("CommandeClientsClassId");
+
+                    b.ToTable("LigneCommandeClientsClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.LigneCommandeFournisseursClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ArticlesClassId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CommandeFournisseursClassId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("PrixUnitaire")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Quantite")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticlesClassId");
+
+                    b.HasIndex("CommandeFournisseursClassId");
+
+                    b.ToTable("LigneCommandeFournisseursClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.ArticlesClass", b =>
+                {
+                    b.HasOne("VinWpf.DataSet.FamillesClass", "FamillesClass")
                         .WithMany()
-                        .HasForeignKey("FamilleClassId")
+                        .HasForeignKey("FamillesClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -206,39 +258,69 @@ namespace VinWpf.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("FamilleClass");
+                    b.Navigation("FamillesClass");
 
                     b.Navigation("FournisseursClass");
                 });
 
             modelBuilder.Entity("VinWpf.DataSet.CommandeClientsClass", b =>
                 {
-                    b.HasOne("VinWpf.DataSet.ArticleClass", "ArticleClass")
-                        .WithMany()
-                        .HasForeignKey("ArticleClassId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("VinWpf.DataSet.ClientsClass", "ClientsClass")
                         .WithMany()
                         .HasForeignKey("ClientsClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ArticleClass");
-
                     b.Navigation("ClientsClass");
                 });
 
-            modelBuilder.Entity("VinWpf.DataSet.CommandeFournisseurClass", b =>
+            modelBuilder.Entity("VinWpf.DataSet.CommandeFournisseursClass", b =>
                 {
-                    b.HasOne("VinWpf.DataSet.ArticleClass", "ArticleClass")
+                    b.HasOne("VinWpf.DataSet.FournisseursClass", "FournisseursClass")
                         .WithMany()
-                        .HasForeignKey("ArticleClassId")
+                        .HasForeignKey("FournisseursClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ArticleClass");
+                    b.Navigation("FournisseursClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.LigneCommandeClientsClass", b =>
+                {
+                    b.HasOne("VinWpf.DataSet.ArticlesClass", "ArticlesClass")
+                        .WithMany()
+                        .HasForeignKey("ArticlesClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VinWpf.DataSet.CommandeClientsClass", "CommandeClientsClass")
+                        .WithMany()
+                        .HasForeignKey("CommandeClientsClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArticlesClass");
+
+                    b.Navigation("CommandeClientsClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.LigneCommandeFournisseursClass", b =>
+                {
+                    b.HasOne("VinWpf.DataSet.ArticlesClass", "ArticlesClass")
+                        .WithMany()
+                        .HasForeignKey("ArticlesClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VinWpf.DataSet.CommandeFournisseursClass", "CommandeFournisseursClass")
+                        .WithMany()
+                        .HasForeignKey("CommandeFournisseursClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ArticlesClass");
+
+                    b.Navigation("CommandeFournisseursClass");
                 });
 #pragma warning restore 612, 618
         }
