@@ -11,12 +11,7 @@ namespace VinWpf.DataSet
     {
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public int Quantite { get; set; }
-        public int PrixCommande { get; set; }
-
-        [ForeignKey("ArticleClass")]
-        public int ArticleClassId { get; set; }
-        public virtual ArticleClass ArticleClass { get; set; }
+        public string Statut { get; set; }
 
         [ForeignKey("ClientsClass")]
         public int ClientsClassId { get; set; }

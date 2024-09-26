@@ -10,12 +10,12 @@ namespace VinWpf.Views
 {
     public partial class Familles : Page
     {
-        public ObservableCollection<FamilleClass> FamillesList { get; set; }
+        public ObservableCollection<FamillesClass> FamillesList { get; set; }
 
         public Familles()
         {
             InitializeComponent();
-            FamillesList = new ObservableCollection<FamilleClass>();
+            FamillesList = new ObservableCollection<FamillesClass>();
             this.DataContext = this;
             LoadFamilles();
         }
@@ -24,7 +24,7 @@ namespace VinWpf.Views
         {
             using (var context = new PhishingContext())
             {
-                var familles = context.FamilleClass.ToList();
+                var familles = context.FamillesClass.ToList();
                 FamillesList.Clear();
                 foreach (var famille in familles)
                 {
@@ -45,7 +45,7 @@ namespace VinWpf.Views
 
             using (PhishingContext context = new PhishingContext())
             {
-                bool nameExists = context.FamilleClass.Any(u => u.Name == TextBoxFamillesName.Text);
+                bool nameExists = context.FamillesClass.Any(u => u.Name == TextBoxFamillesName.Text);
                 if (nameExists)
                 {
                     AddFamillesMessage.Foreground = new SolidColorBrush(Colors.Red);
@@ -53,7 +53,7 @@ namespace VinWpf.Views
                     return;
                 }
 
-                context.FamilleClass.Add(new FamilleClass
+                context.FamillesClass.Add(new FamillesClass
                 {
                     Name = TextBoxFamillesName.Text
                 });
@@ -65,11 +65,11 @@ namespace VinWpf.Views
             }
         }
 
-        private FamilleClass editFamille;
+        private FamillesClass editFamille;
 
         private void EditFamilles_Click(object sender, RoutedEventArgs e)
         {
-            editFamille = ((Button)sender).DataContext as FamilleClass;
+            editFamille = ((Button)sender).DataContext as FamillesClass;
             TextBoxFamillesName.Text = editFamille.Name;
 
             AddFamillesMessage.Text = "";
@@ -91,7 +91,7 @@ namespace VinWpf.Views
                     return;
                 }
 
-                bool nameExists = context.FamilleClass.Any(u => u.Name == TextBoxFamillesName.Text && u.Id != editFamille.Id);
+                bool nameExists = context.FamillesClass.Any(u => u.Name == TextBoxFamillesName.Text && u.Id != editFamille.Id);
 
                 if (nameExists)
                 {
@@ -100,7 +100,7 @@ namespace VinWpf.Views
                     return;
                 }
 
-                var familleToUpdate = context.FamilleClass.FirstOrDefault(u => u.Id == editFamille.Id);
+                var familleToUpdate = context.FamillesClass.FirstOrDefault(u => u.Id == editFamille.Id);
                 familleToUpdate.Name = TextBoxFamillesName.Text;
 
                 context.SaveChanges();
@@ -135,8 +135,8 @@ namespace VinWpf.Views
 
                 using (PhishingContext context = new PhishingContext())
                 {
-                    var familleToDelete = context.FamilleClass.FirstOrDefault(c => c.Id == familleId);
-                    context.FamilleClass.Remove(familleToDelete);
+                    var familleToDelete = context.FamillesClass.FirstOrDefault(c => c.Id == familleId);
+                    context.FamillesClass.Remove(familleToDelete);
                     context.SaveChanges();
                     LoadFamilles();
                     DataGridFamillesMessage.Foreground = new SolidColorBrush(Colors.Green);

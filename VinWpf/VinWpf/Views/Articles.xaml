@@ -30,6 +30,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Modifier" Click="EditArticle_Click" Tag="{Binding Id}" />
                                     <Button Content="Supprimer" Click="DeleteArticle_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
+                                   <!-- <Button Content="Commander (Client)" Click="CommanderArticle_Click" Tag="{Binding Id}" Margin="5,0,0,0"/> -->
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

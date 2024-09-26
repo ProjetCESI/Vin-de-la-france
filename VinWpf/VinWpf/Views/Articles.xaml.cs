@@ -12,17 +12,17 @@ namespace VinWpf.Views
 {
     public partial class Articles : Page
     {
-        public ObservableCollection<ArticleClass> ArticlesList { get; set; }
+        public ObservableCollection<ArticlesClass> ArticlesList { get; set; }
 
         public ObservableCollection<FournisseursClass> fournisseursClass { get; set; }
 
-        private ArticleClass editArticle;
-        public ObservableCollection<FamilleClass> FamilleClass { get; set; }
+        private ArticlesClass editArticle;
+        public ObservableCollection<FamillesClass> FamilleClass { get; set; }
         public Articles()
         {
             InitializeComponent();
-            ArticlesList = new ObservableCollection<ArticleClass>();
-            FamilleClass = new ObservableCollection<FamilleClass>();
+            ArticlesList = new ObservableCollection<ArticlesClass>();
+            FamilleClass = new ObservableCollection<FamillesClass>();
             fournisseursClass = new ObservableCollection<FournisseursClass>();
             this.DataContext = this;
         }
@@ -38,8 +38,8 @@ namespace VinWpf.Views
         {
             using (var context = new PhishingContext())
             {
-                var articles = context.ArticleClass
-                                      .Include(a => a.FamilleClass)
+                var articles = context.ArticlesClass
+                                      .Include(a => a.FamillesClass)
                                       .Include(a => a.FournisseursClass)
                                       .ToList();
                 ArticlesList.Clear();
@@ -54,17 +54,17 @@ namespace VinWpf.Views
         {
             using (PhishingContext context = new PhishingContext())
             {
-                List<FamilleClass> familleList = context.FamilleClass.ToList();
+                List<FamillesClass> familleList = context.FamillesClass.ToList();
                 FamilleClass.Clear();
 
-                FamilleClass allFamille = new FamilleClass
+                FamillesClass allFamille = new FamillesClass
                 {
                     Id = -999,
                     Name = "Toutes les sociétés"
                 };
                 FamilleClass.Add(allFamille);
 
-                foreach (FamilleClass society in familleList)
+                foreach (FamillesClass society in familleList)
                 {
                     FamilleClass.Add(society);
                 }
@@ -111,24 +111,24 @@ namespace VinWpf.Views
             {
                 using (var context = new PhishingContext())
                 {
-                    if (context.ArticleClass.Any(c => c.Name == TextBoxArticlesName.Text))
+                    if (context.ArticlesClass.Any(c => c.Name == TextBoxArticlesName.Text))
                     {
                         ShowMessage(AddArticlesMessage, "Cet article existe déjà.", Colors.Red);
                         return;
                     }
 
-                    var newArticle = new ArticleClass
+                    var newArticle = new ArticlesClass
                     {
                         Name = TextBoxArticlesName.Text,
                         UnitPrice = int.Parse(TextBoxArticlesUnitPrice.Text),
                         QuantityStock = int.Parse(TextBoxArticlesQuantityStock.Text),
                         MinimumThreshold = int.Parse(TextBoxArticlesMinimumThreshold.Text),
-                        FamilleClassId = (int)ComboBoxArticlesFamilleID.SelectedValue,
+                        FamillesClassId = (int)ComboBoxArticlesFamilleID.SelectedValue,
                         Reference = Guid.NewGuid(),
                         FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue
                     };
 
-                    context.ArticleClass.Add(newArticle);
+                    context.ArticlesClass.Add(newArticle);
                     context.SaveChanges();
                     LoadArticles();
                     ClearInputFields();
@@ -140,7 +140,7 @@ namespace VinWpf.Views
 
         private void EditArticle_Click(object sender, RoutedEventArgs e)
         {
-            editArticle = ((Button)sender).DataContext as ArticleClass;
+            editArticle = ((Button)sender).DataContext as ArticlesClass;
             FillInputFieldsForEditing(editArticle);
             ShowEditMode();
             DataGridArticlesMessage.Text = "";
@@ -153,7 +153,7 @@ namespace VinWpf.Views
             {
                 using (var context = new PhishingContext())
                 {
-                    var articleToUpdate = context.ArticleClass.FirstOrDefault(a => a.Id == editArticle.Id);
+                    var articleToUpdate = context.ArticlesClass.FirstOrDefault(a => a.Id == editArticle.Id);
 
                     if (articleToUpdate != null)
                     {
@@ -161,7 +161,7 @@ namespace VinWpf.Views
                         articleToUpdate.UnitPrice = int.Parse(TextBoxArticlesUnitPrice.Text);
                         articleToUpdate.QuantityStock = int.Parse(TextBoxArticlesQuantityStock.Text);
                         articleToUpdate.MinimumThreshold = int.Parse(TextBoxArticlesMinimumThreshold.Text);
-                        articleToUpdate.FamilleClassId = (int)ComboBoxArticlesFamilleID.SelectedValue;
+                        articleToUpdate.FamillesClassId = (int)ComboBoxArticlesFamilleID.SelectedValue;
                         articleToUpdate.FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue;
 
                         context.SaveChanges();
@@ -183,10 +183,10 @@ namespace VinWpf.Views
             {
                 using (var context = new PhishingContext())
                 {
-                    var articleToDelete = context.ArticleClass.FirstOrDefault(a => a.Id == articleId);
+                    var articleToDelete = context.ArticlesClass.FirstOrDefault(a => a.Id == articleId);
                     if (articleToDelete != null)
                     {
-                        context.ArticleClass.Remove(articleToDelete);
+                        context.ArticlesClass.Remove(articleToDelete);
                         context.SaveChanges();
                         LoadArticles();
                         ShowMessage(DataGridArticlesMessage, "L'article a été supprimé avec succès.", Colors.Green);
@@ -204,13 +204,13 @@ namespace VinWpf.Views
             DataGridArticlesMessage.Text = "";
         }
 
-        private void FillInputFieldsForEditing(ArticleClass article)
+        private void FillInputFieldsForEditing(ArticlesClass article)
         {
             TextBoxArticlesName.Text = article.Name;
             TextBoxArticlesUnitPrice.Text = article.UnitPrice.ToString();
             TextBoxArticlesQuantityStock.Text = article.QuantityStock.ToString();
             TextBoxArticlesMinimumThreshold.Text = article.MinimumThreshold.ToString();
-            ComboBoxArticlesFamilleID.SelectedValue = article.FamilleClassId;
+            ComboBoxArticlesFamilleID.SelectedValue = article.FamillesClassId;
             ComboBoxArticlesFournisseurID.SelectedValue = article.FournisseursClassId;
         }
 
@@ -266,5 +266,21 @@ namespace VinWpf.Views
         {
             e.Handled = !decimal.TryParse(e.Text, out _);
         }
+
+        //private void CommanderArticle_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+
+        //    TabControl mainTabControl = (TabControl)mainWindow.FindName("MainTabControl");
+
+        //    TabItem newTab = new TabItem();
+        //    newTab.Header = "Nouvelle Commande";
+        //    Frame frame = new Frame();
+        //    frame.Source = new Uri("/Views/CommandeClients.xaml", UriKind.Relative);
+        //    newTab.Content = frame;
+
+        //    mainTabControl.Items.Add(newTab);
+        //    mainTabControl.SelectedItem = newTab;
+        //}
     }
 }
