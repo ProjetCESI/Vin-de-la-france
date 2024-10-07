@@ -17,6 +17,10 @@
             <TextBlock x:Name="QuantiteArticle" FontSize="14" Margin="0,5,0,0" />
             <TextBlock x:Name="StockMinimumArticle" FontSize="14" Margin="0,5,0,0" />
             <TextBlock x:Name="ReferenceArticle" FontSize="14" Margin="0,5,0,0" />
+            <TextBlock Text="Quantité à commander :" />
+            <TextBox Name="QuantiteCommandeTextBox" Width="200" />
+
+            <Button Content="Commander" Click="Commander_Click" Width="100" />
         </StackPanel>
     </Grid>
 </Page>

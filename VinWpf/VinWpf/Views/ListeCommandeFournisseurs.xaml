@@ -1,0 +1,24 @@
+﻿<Page x:Class="VinWpf.Views.ListeCommandeFournisseurs"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="clr-namespace:VinWpf.Views"
+      Title="ListeCommandeFournisseurs"
+      Loaded="Page_Loaded">
+
+    <Grid>
+        <DataGrid ItemsSource="{Binding Commandes}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Date" Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Statut" Binding="{Binding Statut}" />
+                <DataGridTemplateColumn Header="Action">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Changer Statut" Click="UpdateStatus_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
