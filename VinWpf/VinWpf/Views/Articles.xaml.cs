@@ -267,20 +267,30 @@ namespace VinWpf.Views
             e.Handled = !decimal.TryParse(e.Text, out _);
         }
 
-        //private void CommanderArticle_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
+        private void CommanderArticleFournisseurs_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            if (button != null)
+            {
+                int articleId = (int)button.Tag;
 
-        //    TabControl mainTabControl = (TabControl)mainWindow.FindName("MainTabControl");
+                MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
 
-        //    TabItem newTab = new TabItem();
-        //    newTab.Header = "Nouvelle Commande";
-        //    Frame frame = new Frame();
-        //    frame.Source = new Uri("/Views/CommandeClients.xaml", UriKind.Relative);
-        //    newTab.Content = frame;
+                TabControl mainTabControl = (TabControl)mainWindow.FindName("MainTabControl");
 
-        //    mainTabControl.Items.Add(newTab);
-        //    mainTabControl.SelectedItem = newTab;
-        //}
+                TabItem newTab = new TabItem();
+                newTab.Header = "Nouvelle Commande Fournisseur";
+
+                CommandeFournisseurs commandePage = new CommandeFournisseurs(articleId);
+                Frame frame = new Frame();
+                frame.Content = commandePage;
+
+                newTab.Content = frame;
+
+                mainTabControl.Items.Add(newTab);
+                mainTabControl.SelectedItem = newTab;
+            }
+        }
+
     }
 }
