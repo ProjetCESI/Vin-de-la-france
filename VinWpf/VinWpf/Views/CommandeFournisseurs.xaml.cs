@@ -40,5 +40,50 @@ namespace VinWpf.Views
                 }
             }
         }
+
+        private void Commander_Click(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(QuantiteCommandeTextBox.Text, out int quantiteCommande) && quantiteCommande > 0)
+            {
+                using (var context = new PhishingContext())
+                {
+                    var article = context.ArticlesClass.FirstOrDefault(a => a.Id == articleId);
+
+                    if (article != null)
+                    {
+                        var newCommande = new CommandeFournisseursClass
+                        {
+                            Date = DateTime.Now,
+                            Statut = "En attente",
+                            FournisseursClassId = article.FournisseursClassId
+                        };
+
+                        context.CommandeFournisseursClass.Add(newCommande);
+                        context.SaveChanges();
+
+                        var newLigneCommande = new LigneCommandeFournisseursClass
+                        {
+                            ArticlesClassId = article.Id,
+                            CommandeFournisseursClassId = newCommande.Id,
+                            Quantite = quantiteCommande,
+                            PrixUnitaire = article.UnitPrice
+                        };
+
+                        context.LigneCommandeFournisseursClass.Add(newLigneCommande);
+                        context.SaveChanges();
+
+                        MessageBox.Show("Commande passée avec succès !");
+                    }
+                    else
+                    {
+                        MessageBox.Show("L'article n'a pas été trouvé.");
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Veuillez entrer une quantité valide.");
+            }
+        }
     }
 }

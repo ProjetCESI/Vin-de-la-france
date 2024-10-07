@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using VinWpf.DataSet;
 
@@ -275,11 +276,10 @@ namespace VinWpf.Views
                 int articleId = (int)button.Tag;
 
                 MainWindow mainWindow = (MainWindow)Window.GetWindow(this);
-
                 TabControl mainTabControl = (TabControl)mainWindow.FindName("MainTabControl");
 
                 TabItem newTab = new TabItem();
-                newTab.Header = "Nouvelle Commande Fournisseur";
+                newTab.Header = CreateClosableHeader("Nouvelle Commande Fournisseur", newTab, mainTabControl);
 
                 CommandeFournisseurs commandePage = new CommandeFournisseurs(articleId);
                 Frame frame = new Frame();
@@ -292,5 +292,28 @@ namespace VinWpf.Views
             }
         }
 
+        private StackPanel CreateClosableHeader(string headerText, TabItem tabItem, TabControl tabControl)
+        {
+            StackPanel headerPanel = new StackPanel { Orientation = Orientation.Horizontal };
+
+            TextBlock textBlock = new TextBlock { Text = headerText };
+            headerPanel.Children.Add(textBlock);
+
+            Button closeButton = new Button
+            {
+                Content = "X",
+                Width = 16,
+                Height = 16,
+                Margin = new Thickness(5, 0, 0, 0),
+                Background = Brushes.Transparent,
+                BorderBrush = Brushes.Transparent,
+                Cursor = Cursors.Hand
+            };
+            closeButton.Click += (s, e) => tabControl.Items.Remove(tabItem);
+
+            headerPanel.Children.Add(closeButton);
+
+            return headerPanel;
+        }
     }
 }
