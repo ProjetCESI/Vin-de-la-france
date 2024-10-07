@@ -4,19 +4,25 @@ using Vin_de_la_france.Models;
 
 namespace Vin_de_la_france.Controllers
 {
-    public class HomeController : Controller
+    public class VinsController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<VinsController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public VinsController(ILogger<VinsController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult List()
         {
             return View();
         }
+
+        public IActionResult Details(int id)
+        {
+            return View();
+        }
+
 
         public IActionResult Privacy()
         {
