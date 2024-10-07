@@ -22,7 +22,7 @@
                     <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding UnitPrice}" Width="*"/>
                     <DataGridTextColumn Header="Quantité Stock" Binding="{Binding QuantityStock}" Width="*"/>
                     <DataGridTextColumn Header="Seuil Minimum" Binding="{Binding MinimumThreshold}" Width="*"/>
-                    <DataGridTextColumn Header="Famille" Binding="{Binding FamilleClass.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Famille" Binding="{Binding FamillesClass.Name}" Width="*"/>
                     <DataGridTextColumn Header="Fournisseur" Binding="{Binding FournisseursClass.Name}" Width="*"/>
                     <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
@@ -30,7 +30,7 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Button Content="Modifier" Click="EditArticle_Click" Tag="{Binding Id}" />
                                     <Button Content="Supprimer" Click="DeleteArticle_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
-                                   <!-- <Button Content="Commander (Client)" Click="CommanderArticle_Click" Tag="{Binding Id}" Margin="5,0,0,0"/> -->
+                                    <Button Content="Commander (Fournisseurs)" Click="CommanderArticleFournisseurs_Click" Tag="{Binding Id}" Margin="5,0,0,0"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
