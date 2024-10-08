@@ -16,7 +16,6 @@ namespace VinWpf.DataSet
         public int ArticlesClassId { get; set; }
         public virtual ArticlesClass ArticlesClass { get; set; }
 
-        // Propriété calculée pour le prix total
         [NotMapped]
         public int PrixTotal
         {
