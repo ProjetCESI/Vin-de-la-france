@@ -55,6 +55,12 @@
             </DataGrid>
             
             <TextBlock x:Name="TotalPrixTextBlock" FontWeight="Bold" Margin="10,0,0,0"/>
+
+
+            <TextBlock Text="Sélectionner un client:" FontWeight="Bold" Margin="10,10,0,0"/>
+            <ComboBox x:Name="ClientComboBox" DisplayMemberPath="Name" SelectedValuePath="Id" Width="200" Margin="10,0,0,0"/>
+            <Button x:Name="SaveCommandeButton" Content="Enregistrer la commande" Click="SaveCommande" Margin="10,10,0,0" Width="200" Height="30"/>
+            <TextBlock x:Name="MessageTextBlock" FontWeight="Bold" Margin="10,10,0,0"/>
         </StackPanel>
     </Grid>
 </Page>
