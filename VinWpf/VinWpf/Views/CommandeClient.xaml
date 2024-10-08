@@ -3,12 +3,51 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:VinWpf.Views"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CommandeClient">
-
+      Title="CommandeClient"
+      Loaded="Page_Loaded">
     <Grid>
-        
+        <StackPanel>
+            <TextBlock Text="Articles disponibles:" FontWeight="Bold" Margin="0,0,0,0"/>
+
+            <DataGrid x:Name="ArticlesDataGrid" AutoGenerateColumns="False" Margin="0,0,0,0" Height="200" ItemsSource="{Binding ArticlesClass}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Article" Binding="{Binding Name}" Width="150"/>
+                    <DataGridTextColumn Header="Famille" Binding="{Binding FamillesClass.Name}" Width="150"/>
+                    <DataGridTextColumn Header="Prix" Binding="{Binding UnitPrice}" Width="100"/>
+                    <DataGridTemplateColumn Header="Quantité" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox x:Name="ComboBoxQuantity" Width="60" SelectedItem="{Binding Quantite}">
+                                    <ComboBoxItem Content="1"/>
+                                    <ComboBoxItem Content="2"/>
+                                    <ComboBoxItem Content="3"/>
+                                    <ComboBoxItem Content="4"/>
+                                    <ComboBoxItem Content="5"/>
+                                </ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Action" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="AddPanierName" Click="AddPanier">Ajouter au panier</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <TextBlock Text="Panier:" FontWeight="Bold" Margin="10,0,0,0"/>
+            <DataGrid x:Name="PanierDataGrid" AutoGenerateColumns="False" Margin="0,0,0,0" Height="200" ItemsSource="{Binding LigneCommandeClientsClass}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Article" Binding="{Binding ArticlesClass.Name}" Width="150"/>
+                    <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" Width="100"/>
+                    <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding PrixUnitaire}" Width="100"/>
+                    <DataGridTextColumn Header="Prix Total" Width="100" Binding="{Binding PrixTotal, Mode=OneWay}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Page>
