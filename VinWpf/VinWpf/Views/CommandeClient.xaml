@@ -13,9 +13,9 @@
 
             <DataGrid x:Name="ArticlesDataGrid" AutoGenerateColumns="False" Margin="0,0,0,0" Height="200" ItemsSource="{Binding ArticlesClass}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Article" Binding="{Binding Name}" Width="150"/>
-                    <DataGridTextColumn Header="Famille" Binding="{Binding FamillesClass.Name}" Width="150"/>
-                    <DataGridTextColumn Header="Prix" Binding="{Binding UnitPrice}" Width="100"/>
+                    <DataGridTextColumn Header="Article" Binding="{Binding Name}" Width="*"/>
+                    <DataGridTextColumn Header="Famille" Binding="{Binding FamillesClass.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Prix" Binding="{Binding UnitPrice}" Width="*"/>
                     <DataGridTemplateColumn Header="Quantité" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -25,11 +25,16 @@
                                     <ComboBoxItem Content="3"/>
                                     <ComboBoxItem Content="4"/>
                                     <ComboBoxItem Content="5"/>
+                                    <ComboBoxItem Content="6"/>
+                                    <ComboBoxItem Content="7"/>
+                                    <ComboBoxItem Content="8"/>
+                                    <ComboBoxItem Content="9"/>
+                                    <ComboBoxItem Content="10"/>
                                 </ComboBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Action" Width="100">
+                    <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button x:Name="AddPanierName" Click="AddPanier">Ajouter au panier</Button>
@@ -42,12 +47,14 @@
             <TextBlock Text="Panier:" FontWeight="Bold" Margin="10,0,0,0"/>
             <DataGrid x:Name="PanierDataGrid" AutoGenerateColumns="False" Margin="0,0,0,0" Height="200" ItemsSource="{Binding LigneCommandeClientsClass}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Article" Binding="{Binding ArticlesClass.Name}" Width="150"/>
-                    <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" Width="100"/>
-                    <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding PrixUnitaire}" Width="100"/>
-                    <DataGridTextColumn Header="Prix Total" Width="100" Binding="{Binding PrixTotal, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Article" Binding="{Binding ArticlesClass.Name}" Width="*"/>
+                    <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" Width="*"/>
+                    <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding PrixUnitaire}" Width="*"/>
+                    <DataGridTextColumn Header="Prix Total de l'article" Width="*" Binding="{Binding PrixTotal, Mode=OneWay}"/>
                 </DataGrid.Columns>
             </DataGrid>
+            
+            <TextBlock x:Name="TotalPrixTextBlock" FontWeight="Bold" Margin="10,0,0,0"/>
         </StackPanel>
     </Grid>
 </Page>

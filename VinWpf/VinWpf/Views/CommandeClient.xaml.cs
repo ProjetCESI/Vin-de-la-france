@@ -23,7 +23,10 @@ namespace VinWpf.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            LigneCommandeClientsClass.Clear();
             LoadListeArticles();
+            PanierDataGrid.Items.Refresh();
+            UpdateTotalPrix();
         }
 
         private void LoadListeArticles()
@@ -60,8 +63,17 @@ namespace VinWpf.Views
                 });
 
                 PanierDataGrid.Items.Refresh();
+                UpdateTotalPrix();
             }
         }
+
+        private void UpdateTotalPrix()
+        {
+            int totalPrix = LigneCommandeClientsClass.Sum(ligne => ligne.PrixTotal);
+
+            TotalPrixTextBlock.Text = $"Prix total: {totalPrix} €";
+        }
+
 
         private static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
