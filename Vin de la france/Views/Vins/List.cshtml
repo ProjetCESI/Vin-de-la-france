@@ -1,8 +1,34 @@
-﻿@{
-    ViewData["Title"] = "VINDELAFRONCE - Accueil";
+﻿@model IEnumerable<Vin_de_la_france.Models.Entities.Vin>
+
+@{
+    ViewData["Title"] = "Liste des Vins";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h1>Liste des Vins</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prix Unitaire</th>
+            <th>Quantité en Stock</th>
+            <th>Famille</th>
+            <th>Fournisseur</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var vin in Model)
+        {
+            <tr>
+                <td>@vin.Name</td>
+                <td>@vin.UnitPrice €</td>
+                <td>@vin.QuantityStock</td>
+                <td>@vin.Famille?.Name</td>
+                <td>@vin.Fournisseur?.Name</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@vin.Id" class="btn btn-info">Détails</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
