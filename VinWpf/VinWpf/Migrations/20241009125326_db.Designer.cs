@@ -12,7 +12,7 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(PhishingContext))]
-    [Migration("20241009122326_db")]
+    [Migration("20241009125326_db")]
     partial class db
     {
         /// <inheritdoc />
@@ -38,6 +38,10 @@ namespace VinWpf.Migrations
 
                     b.Property<int>("FournisseursClassId")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("MinimumThreshold")
                         .HasColumnType("integer");

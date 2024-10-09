@@ -61,6 +61,10 @@
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Fournisseur:</TextBlock>
             <ComboBox x:Name="ComboBoxArticlesFournisseurID" Width="200" Height="20"/>
 
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Image:</TextBlock>
+            <Button Content="Sélectionner une image" Width="200" Height="30" Click="SelectImage_Click"/>
+            <Image x:Name="SelectedImage" Width="100" Height="100" Margin="10"/>
+            
             <Button Content="Ajouter" Width="100" x:Name="AddArticlesButton" Click="AddArticles_Click" Margin="5"/>
             <Button Visibility="Collapsed" Content="Modifier" Width="100" x:Name="UpdateArticlesButton" Click="UpdateArticle_Click" Margin="5"/>
             <Button Visibility="Collapsed" Content="Annuler" Width="100" x:Name="CancelUpdateArticlesButton" Click="CancelUpdateArticle_Click" Margin="5"/>

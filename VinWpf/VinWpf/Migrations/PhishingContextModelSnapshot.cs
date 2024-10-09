@@ -36,6 +36,10 @@ namespace VinWpf.Migrations
                     b.Property<int>("FournisseursClassId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("MinimumThreshold")
                         .HasColumnType("integer");
 
