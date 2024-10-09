@@ -46,6 +46,25 @@ namespace Vin_de_la_france_2.Controllers
             return View(articlesClass);
         }
 
+        // GetArticlesImages
+        public IActionResult GetArticleImage(int id)
+        {
+            // Récupérer l'article avec l'image
+            var article = _context.ArticlesClasses.FirstOrDefault(a => a.Id == id);
+
+            if (article == null || string.IsNullOrEmpty(article.Image))
+            {
+                return NotFound(); // Si l'article n'a pas d'image, retourner 404
+            }
+
+            // Convertir la chaîne Base64 en tableau de bytes
+            byte[] imageBytes = Convert.FromBase64String(article.Image);
+
+            // Retourner l'image avec le bon type MIME (adaptez selon le format de l'image)
+            return File(imageBytes, "image/png"); // Si vous utilisez PNG, sinon changez en "image/jpeg", etc.
+        }
+
+
         private bool ArticlesClassExists(int id)
         {
             return _context.ArticlesClasses.Any(e => e.Id == id);

@@ -17,8 +17,8 @@ namespace Vin_de_la_france_2.Models
         public int UnitPrice { get; set; }
         public int QuantityStock { get; set; }
         public int MinimumThreshold { get; set; }
+        public string? Image { get; set; }
         public Guid Reference { get; set; }
-
         public int FamillesClassId { get; set; }
         public int FournisseursClassId { get; set; }
 
