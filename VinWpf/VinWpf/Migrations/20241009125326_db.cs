@@ -89,6 +89,7 @@ namespace VinWpf.Migrations
                     QuantityStock = table.Column<int>(type: "integer", nullable: false),
                     MinimumThreshold = table.Column<int>(type: "integer", nullable: false),
                     Reference = table.Column<Guid>(type: "uuid", nullable: false),
+                    Image = table.Column<string>(type: "text", nullable: false),
                     FamillesClassId = table.Column<int>(type: "integer", nullable: false),
                     FournisseursClassId = table.Column<int>(type: "integer", nullable: false)
                 },

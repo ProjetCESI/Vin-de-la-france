@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using VinWpf.DataSet;
 
 namespace VinWpf.Views
@@ -19,6 +23,8 @@ namespace VinWpf.Views
 
         private ArticlesClass editArticle;
         public ObservableCollection<FamillesClass> FamilleClass { get; set; }
+
+        private string base64ImageString;
         public Articles()
         {
             InitializeComponent();
@@ -51,6 +57,27 @@ namespace VinWpf.Views
             }
         }
 
+        private void SelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                BitmapImage bitmap = new BitmapImage(new Uri(openFileDialog.FileName));
+                SelectedImage.Source = bitmap;
+
+                base64ImageString = ConvertImageToBase64(openFileDialog.FileName);
+            }
+        }
+
+        private string ConvertImageToBase64(string imagePath)
+        {
+            byte[] imageBytes = File.ReadAllBytes(imagePath);
+            return Convert.ToBase64String(imageBytes);
+        }
         private void LoadComboBoxArticlesFamilleID()
         {
             using (PhishingContext context = new PhishingContext())
@@ -61,7 +88,7 @@ namespace VinWpf.Views
                 FamillesClass allFamille = new FamillesClass
                 {
                     Id = -999,
-                    Name = "Toutes les sociétés"
+                    Name = "Toutes les familles"
                 };
                 FamilleClass.Add(allFamille);
 
@@ -126,7 +153,8 @@ namespace VinWpf.Views
                         MinimumThreshold = int.Parse(TextBoxArticlesMinimumThreshold.Text),
                         FamillesClassId = (int)ComboBoxArticlesFamilleID.SelectedValue,
                         Reference = Guid.NewGuid(),
-                        FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue
+                        FournisseursClassId = (int)ComboBoxArticlesFournisseurID.SelectedValue,
+                        Image = base64ImageString
                     };
 
                     context.ArticlesClass.Add(newArticle);
@@ -134,10 +162,10 @@ namespace VinWpf.Views
                     LoadArticles();
                     ClearInputFields();
                     ShowMessage(AddArticlesMessage, "L'article a été ajouté avec succès.", Colors.Green);
-                    DataGridArticlesMessage.Text = "";
                 }
             }
         }
+
 
         private void EditArticle_Click(object sender, RoutedEventArgs e)
         {
@@ -254,7 +282,8 @@ namespace VinWpf.Views
                 string.IsNullOrWhiteSpace(TextBoxArticlesQuantityStock.Text) ||
                 string.IsNullOrWhiteSpace(TextBoxArticlesMinimumThreshold.Text) ||
                 ComboBoxArticlesFournisseurID.SelectedIndex == 0 ||
-                ComboBoxArticlesFamilleID.SelectedIndex == 0)
+                ComboBoxArticlesFamilleID.SelectedIndex == 0 ||
+                string.IsNullOrWhiteSpace(base64ImageString))
             {
                 ShowMessage(AddArticlesMessage, "Veuillez remplir tous les champs.", Colors.Red);
                 return false;

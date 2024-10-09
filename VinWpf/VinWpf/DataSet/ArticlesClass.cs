@@ -15,6 +15,7 @@ namespace VinWpf.DataSet
         public int QuantityStock { get; set; }
         public int MinimumThreshold { get; set; }
         public Guid Reference { get; set; }
+        public string Image { get; set; }
 
 
         [ForeignKey("FamillesClass")]
