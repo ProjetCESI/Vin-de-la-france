@@ -20,6 +20,12 @@
             <TabItem Header="Articles">
                 <Frame Source="/Views/Articles.xaml"/>
             </TabItem>
+            <TabItem Header="Liste commandes fournisseurs">
+                <Frame Source="/Views/ListeCommandeFournisseurs.xaml"/>
+            </TabItem>
+            <TabItem Header="Liste commandes clients">
+                <Frame Source="/Views/ListeCommandeClients.xaml"/>
+            </TabItem>
         </TabControl>
     </Grid>
 </Window>

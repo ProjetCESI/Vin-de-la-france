@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VinWpf.DataSet
 {
@@ -20,5 +15,14 @@ namespace VinWpf.DataSet
         [ForeignKey("ArticlesClass")]
         public int ArticlesClassId { get; set; }
         public virtual ArticlesClass ArticlesClass { get; set; }
+
+        [NotMapped]
+        public int PrixTotal
+        {
+            get
+            {
+                return Quantite * PrixUnitaire;
+            }
+        }
     }
 }
