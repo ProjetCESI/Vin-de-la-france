@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35219.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vin_de_la_france_2", "Vin_de_la_france_2\Vin_de_la_france_2.csproj", "{55D7A58F-C8D3-4033-AD50-D3CC523CDD15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55D7A58F-C8D3-4033-AD50-D3CC523CDD15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55D7A58F-C8D3-4033-AD50-D3CC523CDD15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55D7A58F-C8D3-4033-AD50-D3CC523CDD15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55D7A58F-C8D3-4033-AD50-D3CC523CDD15}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A60FBE5-1FB5-4CEA-B7DF-6D9CD536B974}
+	EndGlobalSection
+EndGlobal
