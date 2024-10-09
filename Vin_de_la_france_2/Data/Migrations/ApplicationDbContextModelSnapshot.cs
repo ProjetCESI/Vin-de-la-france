@@ -58,7 +58,7 @@ namespace Vin_de_la_france_2.Data.Migrations
 
                     b.HasIndex("FournisseursClassId");
 
-                    b.ToTable("ArticlesClass");
+                    b.ToTable("ArticlesClass", (string)null);
                 });
 
             modelBuilder.Entity("Vin_de_la_france_2.Models.FamillesClass", b =>
@@ -75,7 +75,7 @@ namespace Vin_de_la_france_2.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FamillesClasses");
+                    b.ToTable("FamillesClasses", (string)null);
                 });
 
             modelBuilder.Entity("Vin_de_la_france_2.Models.FournisseursClass", b =>
@@ -92,7 +92,7 @@ namespace Vin_de_la_france_2.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FournisseursClasses");
+                    b.ToTable("FournisseursClasses", (string)null);
                 });
 
             modelBuilder.Entity("Vin_de_la_france_2.Models.ArticlesClass", b =>

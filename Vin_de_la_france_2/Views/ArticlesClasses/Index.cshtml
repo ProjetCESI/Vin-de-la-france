@@ -4,66 +4,24 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Catalogue</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UnitPrice)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityStock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinimumThreshold)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Reference)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FamillesClass)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FournisseursClass)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UnitPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityStock)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MinimumThreshold)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Reference)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FamillesClass.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FournisseursClass.Name)
-            </td>
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<section class="cards">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <!-- Utilisez le bon contrôleur (ArticlesClasses) pour l'URL de l'image -->
+            <img class="card-img-top" src="@Url.Action("GetArticleImage", "ArticlesClasses", new { id = item.Id })" alt="Image de l'article" width="200" height="200" />
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                <p class="card-text">
+                    Famille: @Html.DisplayFor(modelItem => item.FamillesClass.Name) <br />
+                    Fournisseur: @Html.DisplayFor(modelItem => item.FournisseursClass.Name) <br />
+                    Prix: @Html.DisplayFor(modelItem => item.UnitPrice) € <br />
+                    Stock: @Html.DisplayFor(modelItem => item.QuantityStock)
+                </p>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Détails</a>
+            </div>
+        </div>
+    }
+</section>

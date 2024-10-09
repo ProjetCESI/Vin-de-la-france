@@ -18,5 +18,41 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #fff;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* Espace entre les cartes */
+    justify-content:start; /* Permet de centrer les cartes */
+    height: 100%;
+}
+
+.card {
+    width: 18rem; /* Largeur de chaque carte */
+    margin-bottom: 1rem; /* Espacement en bas de chaque carte */
+}
+
+.card-img-top  {
+    width: 150px;
+    height:auto;
+    margin:0 auto;
+}
+
+.card-body {
+    flex-grow: 1; /* Permet à la partie texte de prendre l'espace restant */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Positionne le contenu correctement */
+}
+
+.card-text {
+    margin-bottom: auto; /* Pour que le texte reste en haut et prenne l'espace */
+}
+
+.card-body .btn {
+    margin-top: auto; /* Force le bouton à être en bas de la carte */
+    margin-left:auto;
+    width:50%;
 }
