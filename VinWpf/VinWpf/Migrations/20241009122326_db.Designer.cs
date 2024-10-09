@@ -12,7 +12,7 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(PhishingContext))]
-    [Migration("20240926092838_db")]
+    [Migration("20241009122326_db")]
     partial class db
     {
         /// <inheritdoc />
@@ -105,7 +105,7 @@ namespace VinWpf.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Statut")
                         .IsRequired()
@@ -127,7 +127,7 @@ namespace VinWpf.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("FournisseursClassId")
                         .HasColumnType("integer");

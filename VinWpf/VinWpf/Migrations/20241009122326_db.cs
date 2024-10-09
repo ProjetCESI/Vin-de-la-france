@@ -63,7 +63,7 @@ namespace VinWpf.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Statut = table.Column<string>(type: "text", nullable: false),
                     ClientsClassId = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -115,7 +115,7 @@ namespace VinWpf.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Statut = table.Column<string>(type: "text", nullable: false),
                     FournisseursClassId = table.Column<int>(type: "integer", nullable: false)
                 },
