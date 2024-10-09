@@ -23,9 +23,6 @@
             <TabItem Header="Liste commandes fournisseurs">
                 <Frame Source="/Views/ListeCommandeFournisseurs.xaml"/>
             </TabItem>
-            <TabItem Header="Commandes clients">
-                <Frame Source="/Views/CommandeClient.xaml"/>
-            </TabItem>
             <TabItem Header="Liste commandes clients">
                 <Frame Source="/Views/ListeCommandeClients.xaml"/>
             </TabItem>
