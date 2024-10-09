@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
-using Vin_de_la_france.Models.Entities;
+using Vin_de_la_france.Models;
 
 
 namespace Vin_de_la_france.Models;
@@ -22,5 +22,5 @@ public partial class Fournisseur
     public string Email { get; set; } = null!;
 
     [InverseProperty("FournisseursClass")]
-    public virtual ICollection<Vin> Vins { get; set; } = new List<Vin>();
+    public virtual ICollection<ArticlesClass> ArticlesClasses { get; set; } = new List<ArticlesClass>();
 }

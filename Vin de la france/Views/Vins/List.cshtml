@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Vin_de_la_france.Models.Entities.Vin>
+﻿@model IEnumerable<Vin_de_la_france.Models.ArticlesClass>
 
 @{
     ViewData["Title"] = "Liste des Vins";
@@ -23,8 +23,8 @@
                 <td>@vin.Name</td>
                 <td>@vin.UnitPrice €</td>
                 <td>@vin.QuantityStock</td>
-                <td>@vin.Famille?.Name</td>
-                <td>@vin.Fournisseur?.Name</td>
+                <td>@vin.FamillesClass?.Name</td> <!-- Utilisation correcte de la relation FamillesClass -->
+                <td>@vin.FournisseursClass?.Name</td> <!-- Utilisation correcte de la relation FournisseursClass -->
                 <td>
                     <a asp-action="Details" asp-route-id="@vin.Id" class="btn btn-info">Détails</a>
                 </td>

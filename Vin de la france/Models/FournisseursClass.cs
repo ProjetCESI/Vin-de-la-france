@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Vin_de_la_france.Models;
 
-namespace Vin_de_la_france.Models.Entities
+namespace Vin_de_la_france.Models
 {
     public class FournisseursClass
     {
@@ -21,6 +22,6 @@ namespace Vin_de_la_france.Models.Entities
         public string Email { get; set; } = string.Empty;
 
         // Liste des vins associés à ce fournisseur
-        public ICollection<Vin> Vins { get; set; } = new List<Vin>();
+        public ICollection<ArticlesClass> ArticlesClasses { get; set; } = new List<ArticlesClass>();
     }
 }

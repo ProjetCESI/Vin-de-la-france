@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Vin_de_la_france.Models.Entities;
+using Vin_de_la_france.Models;  // Ajoutez le namespace contenant les modèles
 
-namespace Vin_de_la_france.Data
+namespace Vin_de_la_france.Data  // Assurez-vous que ce namespace correspond bien à votre projet
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -11,7 +11,7 @@ namespace Vin_de_la_france.Data
         {
         }
 
-        public DbSet<Vin> Vins { get; set; }
+        public DbSet<ArticlesClass> ArticlesClass { get; set; }
         public DbSet<FamillesClass> Familles { get; set; }
         public DbSet<FournisseursClass> Fournisseurs { get; set; }
 
@@ -19,17 +19,18 @@ namespace Vin_de_la_france.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Configuration des relations et contraintes
-            modelBuilder.Entity<Vin>()
-                .HasOne(v => v.Famille)
-                .WithMany(f => f.Vins)
-                .HasForeignKey(v => v.FamillesClassId)
+            // Relations avec FamillesClass
+            modelBuilder.Entity<ArticlesClass>()
+                .HasOne(a => a.FamillesClass)
+                .WithMany(f => f.ArticlesClasses)
+                .HasForeignKey(a => a.FamillesClassId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Vin>()
-                .HasOne(v => v.Fournisseur)
-                .WithMany(f => f.Vins)
-                .HasForeignKey(v => v.FournisseursClassId)
+            // Relations avec FournisseursClass
+            modelBuilder.Entity<ArticlesClass>()
+                .HasOne(a => a.FournisseursClass)
+                .WithMany(f => f.ArticlesClasses)
+                .HasForeignKey(a => a.FournisseursClassId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
