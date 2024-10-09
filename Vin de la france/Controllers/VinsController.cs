@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Vin_de_la_france.Data;  // Assurez-vous que ce namespace correspond à celui de votre ApplicationDbContext
+using Vin_de_la_france.Data; 
 using Vin_de_la_france.Models;
 
 namespace Vin_de_la_france.Controllers
@@ -15,17 +15,16 @@ namespace Vin_de_la_france.Controllers
             _context = context;
         }
 
-        // Action pour afficher la liste des vins
         public async Task<IActionResult> List()
         {
-            // Récupération des données depuis ArticlesClass avec les relations (Famille, Fournisseur)
-            var vins = await _context.ArticlesClass
-                .Include(v => v.FamillesClass)        // S'assurer d'inclure les relations avec Famille
-                .Include(v => v.FournisseursClass)    // S'assurer d'inclure les relations avec Fournisseur
+            var articles = await _context.ArticlesClass
+                .Include(a => a.FamillesClass) 
+                .Include(a => a.FournisseursClass) 
                 .ToListAsync();
 
-            return View(vins);  // Transmettre les données à la vue
+            return View(articles); 
         }
+
 
         public IActionResult Privacy()
         {

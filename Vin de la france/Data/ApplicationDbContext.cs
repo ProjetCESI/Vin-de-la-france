@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Vin_de_la_france.Models;  // Ajoutez le namespace contenant les modèles
+using Vin_de_la_france.Models;
 
-namespace Vin_de_la_france.Data  // Assurez-vous que ce namespace correspond bien à votre projet
+namespace Vin_de_la_france.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -19,14 +19,13 @@ namespace Vin_de_la_france.Data  // Assurez-vous que ce namespace correspond bie
         {
             base.OnModelCreating(modelBuilder);
 
-            // Relations avec FamillesClass
+            // Configure relationships and constraints if necessary
             modelBuilder.Entity<ArticlesClass>()
                 .HasOne(a => a.FamillesClass)
                 .WithMany(f => f.ArticlesClasses)
                 .HasForeignKey(a => a.FamillesClassId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // Relations avec FournisseursClass
             modelBuilder.Entity<ArticlesClass>()
                 .HasOne(a => a.FournisseursClass)
                 .WithMany(f => f.ArticlesClasses)

@@ -17,17 +17,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var vin in Model)
+        @foreach (var article in Model)
         {
             <tr>
-                <td>@vin.Name</td>
-                <td>@vin.UnitPrice €</td>
-                <td>@vin.QuantityStock</td>
-                <td>@vin.FamillesClass?.Name</td> <!-- Utilisation correcte de la relation FamillesClass -->
-                <td>@vin.FournisseursClass?.Name</td> <!-- Utilisation correcte de la relation FournisseursClass -->
-                <td>
-                    <a asp-action="Details" asp-route-id="@vin.Id" class="btn btn-info">Détails</a>
-                </td>
+                <td>@article.Name</td>
+                <td>@article.UnitPrice €</td>
+                <td>@article.QuantityStock</td>
+                <td>@article.FamillesClass?.Name</td> <!-- Affichage de la Famille -->
+                <td>@article.FournisseursClass?.Name</td> <!-- Affichage du Fournisseur -->
             </tr>
         }
     </tbody>
