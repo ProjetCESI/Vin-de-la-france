@@ -25,14 +25,28 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem; /* Espace entre les cartes */
-    justify-content:start; /* Permet de centrer les cartes */
+    justify-content: flex-start; /* Aligne les cartes à gauche */
+    max-width: 1200px; /* Limite la largeur maximale du conteneur */
+    margin: 0 auto; /* Centre le conteneur dans la page */
     height: 100%;
+    margin-bottom: 100px;
 }
 
 .card {
-    width: 18rem; /* Largeur de chaque carte */
-    margin-bottom: 1rem; /* Espacement en bas de chaque carte */
+    width: 18rem; 
+    margin-bottom: 1rem; 
+    padding: 10px;
+    cursor: default;
+    transition: all 0.15s ease-in-out;
+    background: #FFFFFF;
+    background: linear-gradient(180deg, #f2e8cf22 0%, #FFFFFF 100%);
+    border: 0px;
 }
+
+    .card:hover {
+        transition: all 0.15s ease-in-out;
+        box-shadow: -1px 1px 1px 0px #ccc;
+    }
 
 .card-img-top  {
     width: 150px;
@@ -45,14 +59,39 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between; /* Positionne le contenu correctement */
+    margin-bottom:10px;
 }
 
 .card-text {
     margin-bottom: auto; /* Pour que le texte reste en haut et prenne l'espace */
 }
+.card-foo {
+    display:flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-top: auto; /* Force le bouton à être en bas de la carte */
+    padding:0 10px;
+}
 
 .card-body .btn {
-    margin-top: auto; /* Force le bouton à être en bas de la carte */
     margin-left:auto;
-    width:50%;
+    width:100%;
+}
+
+
+.price {
+    background-color: #ececec54;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.15s ease-in-out;
+}
+
+    .price:hover {
+        transition: all 0.15s ease-in-out;
+        box-shadow: -1px 1px 1px 0px #ccc;
+    }
+
+.card-title {
+    text-align:center;
+
 }

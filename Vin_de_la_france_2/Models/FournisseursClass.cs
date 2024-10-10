@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Vin_de_la_france_2.Models;
-using System.ComponentModel.DataAnnotations.Schema;  // Ajoutez cette directive pour l'attribut [Table]
+using System.ComponentModel.DataAnnotations.Schema; 
 
 
 namespace Vin_de_la_france_2.Models
