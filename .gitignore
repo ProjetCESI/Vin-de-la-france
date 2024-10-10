@@ -362,4 +362,5 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-appsettings.json
+Vin_de_la_france_2/appsettings.json
+Vin_de_la_france_2/appsettings.Development.json
