@@ -21,8 +21,6 @@ namespace Vin_de_la_france_2.Models
         public Guid Reference { get; set; }
         public int FamillesClassId { get; set; }
         public int FournisseursClassId { get; set; }
-
-        // Relations avec les autres entités
         public virtual FamillesClass FamillesClass { get; set; }
         public virtual FournisseursClass FournisseursClass { get; set; }
     }
