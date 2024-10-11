@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Vin_de_la_france_2.Data;
 using Vin_de_la_france_2.Services;
 

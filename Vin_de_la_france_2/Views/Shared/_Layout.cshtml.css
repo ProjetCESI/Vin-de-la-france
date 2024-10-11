@@ -6,17 +6,22 @@ for details on configuring this project to bundle and minify static web assets. 
 }
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
-a {
-  color: #0077cc;
+.navbar-brand {
+    color: #ffffff !important;
 }
+
+/*a {
+  color: #0077cc;
+}*/
 
 .navbar {
-    background-color: #bC4749 !important;
+    background-color: #1E1E24 !important;
+    color:#ffffff !important;
 }
 
 .btn-primary {
