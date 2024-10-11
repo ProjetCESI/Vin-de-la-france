@@ -1,18 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace VinWpf.DataSet
+namespace Vin_de_la_france_2.Models
 {
+    [Table("LigneCommandeClientsClass")]
     public class LigneCommandeClientsClass
     {
+        [Key]
         public int Id { get; set; }
+
+        [Required]
         public int Quantite { get; set; }
         public int PrixUnitaire { get; set; }
 
-        [ForeignKey("CommandeClientsClass")]
         public int CommandeClientsClassId { get; set; }
         public virtual CommandeClientsClass CommandeClientsClass { get; set; }
 
-        [ForeignKey("ArticlesClass")]
         public int ArticlesClassId { get; set; }
         public virtual ArticlesClass ArticlesClass { get; set; }
     }
