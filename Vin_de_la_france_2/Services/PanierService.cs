@@ -20,12 +20,10 @@ namespace Vin_de_la_france_2.Services
             var panier = GetPanier();
             if (panier == null || panier.LigneCommandeClientsClass == null || !panier.LigneCommandeClientsClass.Any())
             {
-                Console.WriteLine("Le panier est vide ou n'a pas de lignes de commande.");
                 return 0;
             }
 
             int totalQuantite = panier.LigneCommandeClientsClass.Sum(l => l.Quantite);
-            Console.WriteLine($"Quantité totale dans le panier: {totalQuantite}");
             return totalQuantite;
         }
 
@@ -54,22 +52,18 @@ namespace Vin_de_la_france_2.Services
 
         public void AjouterArticle(int articleId, int quantite)
         {
-            Console.WriteLine($"Ajout de l'article avec ID: {articleId} et quantité: {quantite}");
 
             var panier = GetPanier();
-            Console.WriteLine($"Panier ID: {panier.Id}");
 
             var article = _context.ArticlesClasses.Find(articleId);
             if (article != null)
             {
-                Console.WriteLine($"Article trouvé: {article.Name} - Prix unitaire: {article.UnitPrice}");
 
                 var ligneCommande = _context.LigneCommandeClientsClasses
                     .FirstOrDefault(lc => lc.CommandeClientsClassId == panier.Id && lc.ArticlesClassId == articleId);
 
                 if (ligneCommande == null)
                 {
-                    Console.WriteLine("L'article n'est pas encore dans le panier, création d'une nouvelle ligne.");
                     ligneCommande = new LigneCommandeClientsClass
                     {
                         ArticlesClassId = articleId,
@@ -81,17 +75,13 @@ namespace Vin_de_la_france_2.Services
                 }
                 else
                 {
-                    Console.WriteLine($"L'article est déjà dans le panier. Quantité actuelle: {ligneCommande.Quantite}");
                     ligneCommande.Quantite += quantite;
-                    Console.WriteLine($"Nouvelle quantité après ajout: {ligneCommande.Quantite}");
                 }
 
                 _context.SaveChanges();
-                Console.WriteLine("Article ajouté/mis à jour dans le panier avec succès.");
             }
             else
             {
-                Console.WriteLine($"Article avec ID {articleId} non trouvé.");
             }
         }
 
