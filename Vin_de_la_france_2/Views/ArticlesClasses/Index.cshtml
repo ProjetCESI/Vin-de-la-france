@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Catalogue</h1>
+<h1 id="catalogue-title">Catalogue</h1>
 
 <section class="cards">
     @foreach (var item in Model)
@@ -21,8 +21,9 @@
             </div>
             <div class="card-foo">
                 <p class="price">Prix : @Html.DisplayFor(modelItem => item.UnitPrice) €</p>
-                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id">Détails</a>
             </div>
+                <!-- Ajout d'un lien invisible couvrant toute la carte -->
+                <a href="@Url.Action("Details", "ArticlesClasses", new { id = item.Id })" class="stretched-link"></a>
         </div>
     }
 </section>
