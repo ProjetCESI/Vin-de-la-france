@@ -33,10 +33,10 @@ body {
 }
 
 .card {
-    width: 18rem; 
-    margin-bottom: 1rem; 
+    width: 18rem;
+    margin-bottom: 1rem;
     padding: 10px;
-    cursor: default;
+    cursor: pointer;
     transition: all 0.15s ease-in-out;
     background: #FFFFFF;
     background: linear-gradient(180deg, #f2e8cf22 0%, #FFFFFF 100%);
@@ -45,13 +45,22 @@ body {
 
     .card:hover {
         transition: all 0.15s ease-in-out;
-        box-shadow: -1px 1px 1px 0px #ccc;
+        box-shadow: 0px 0px 3px 0px #ccc;
+        transform: scale(1.05); /* Légère augmentation de la taille pour l'effet de focus */
     }
 
-.card-img-top  {
+
+
+
+.card-img-top {
     width: 150px;
-    height:auto;
-    margin:0 auto;
+    height: auto;
+    margin: 0 auto;
+    transition: transform 0.3s ease; /* Ajout d'une animation sur l'image */
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.1); /* L'image augmente légèrement au survol */
 }
 
 .card-body {
@@ -93,5 +102,21 @@ body {
 
 .card-title {
     text-align:center;
+    font-weight: 700;
 
+}
+
+.stretched-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    text-decoration: none;
+    color: inherit;
+}
+
+#catalogue-title {
+    margin-bottom:30px;
 }
