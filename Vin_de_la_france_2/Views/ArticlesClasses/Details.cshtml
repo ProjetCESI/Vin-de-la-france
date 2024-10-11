@@ -4,10 +4,17 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Détails de l'article</h1>
+<h1 id="details-title">Détails de l'article</h1>
+
+<div class="back-btn">
+    <a class="btn btn-secondary" asp-action="Index">Retour au catalogue</a>
+</div>
 
 <div>
-    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <div class="product-header d-flex align-items-center">
+        <img class="product-img" src="@Url.Action("GetArticleImage", "ArticlesClasses", new { id = Model.Id })" alt="Image de l'article" width="200" height="200" />
+        <h4 class="product-name">@Html.DisplayFor(model => model.Name)</h4>
+    </div>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">Nom du produit</dt>
@@ -44,6 +51,4 @@
     </div>
 </div>
 
-<div>
-    <a class="btn btn-secondary" asp-action="Index">Retour au catalogue</a>
-</div>
+

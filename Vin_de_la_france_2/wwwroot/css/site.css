@@ -1,3 +1,5 @@
+
+
 html {
   font-size: 14px;
 }
@@ -18,7 +20,9 @@ html {
 }
 
 body {
-    background-color: #fff;
+    background-color: #fefefe;
+    font-family: "Vollkorn", serif;
+    font-optical-sizing: auto;
 }
 
 .cards {
@@ -39,8 +43,8 @@ body {
     cursor: pointer;
     transition: all 0.15s ease-in-out;
     background: #FFFFFF;
-    background: linear-gradient(180deg, #f2e8cf22 0%, #FFFFFF 100%);
-    border: 0px;
+    background: #1E1E2409;
+    border:1px solid #1E1E2419;
 }
 
     .card:hover {
@@ -73,6 +77,10 @@ body {
 
 .card-text {
     margin-bottom: auto; /* Pour que le texte reste en haut et prenne l'espace */
+    background-color: #fefefe;
+    padding: 5px 10px;
+    border-radius: 10px;
+    min-height:130px;
 }
 .card-foo {
     display:flex;
@@ -89,7 +97,7 @@ body {
 
 
 .price {
-    background-color: #ececec54;
+    background-color: #fefefe;
     padding: 5px 10px;
     border-radius: 10px;
     transition: all 0.15s ease-in-out;
@@ -118,5 +126,85 @@ body {
 }
 
 #catalogue-title {
-    margin-bottom:30px;
+    position: relative;
+    margin: 20px 0;
+    padding: 5px;
+    background-color: #f7f7f7cc;
+    border: 1px solid #f9f9f9;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    cursor:default;
+}
+
+.navbar-brand {
+    color: #fff !important;
+    font-weight:700;
+}
+
+.nav-link {
+    color: #fff !important; 
+}
+
+.cart-btn {
+    width: 100px;
+    margin-left: 20px;
+    background-color: #f7f7f7cc;
+    box-shadow: none !important;
+    border:none !important;
+}
+
+    .cart-btn:hover {
+        background-color: #f7f7f7aa !important;
+    }
+
+    .cart-btn:focus {
+        background-color: #f7f7f7aa !important;
+        border:none !important;
+        box-shadow:none !important;
+    }
+
+#cart-icon {
+    width:20px;
+    height:20px;
+    font-weight:700;
+    fill:#000 !important;
+}
+
+
+
+#details-title {
+    position: relative;
+    margin: 20px 0;
+    padding: 5px;
+    background-color: #f7f7f7cc;
+    border: 1px solid #f9f9f9;
+    width: 100%;
+    text-align: center;
+    border-radius: 10px;
+    cursor: default;
+}
+
+.back-btn {
+    margin:20px auto;
+}
+
+
+.product-header {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espace entre l'image et le texte */
+    margin-bottom: 20px;
+}
+
+.product-img {
+    width: 50px;
+    height: auto;
+    border-radius: 8px; /* Optionnel : pour arrondir les coins de l'image */
+}
+
+.product-name {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
 }
