@@ -4,56 +4,46 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Détails de l'article</h1>
 
 <div>
     <h4>@Html.DisplayFor(model => model.Name)</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            Nom du produit
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Prix unitaire
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UnitPrice)
-        </dd>
-        <dt class = "col-sm-2">
-            Quantité en stock
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QuantityStock)
-        </dd>
-        <dt class = "col-sm-2">
-            Stock Minimum
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MinimumThreshold)
-        </dd>
-        <dt class = "col-sm-2">
-            Référence
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Reference)
-        </dd>
-        <dt class = "col-sm-2">
-            Famille
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FamillesClass.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            Fournisseur
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FournisseursClass.Name)
-        </dd>
+        <dt class="col-sm-2">Nom du produit</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Name)</dd>
+
+        <dt class="col-sm-2">Prix unitaire</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.UnitPrice) €</dd>
+
+        <dt class="col-sm-2">Quantité en stock</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.QuantityStock)</dd>
+
+        <dt class="col-sm-2">Stock Minimum</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.MinimumThreshold)</dd>
+
+        <dt class="col-sm-2">Référence</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.Reference)</dd>
+
+        <dt class="col-sm-2">Famille</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.FamillesClass.Name)</dd>
+
+        <dt class="col-sm-2">Fournisseur</dt>
+        <dd class="col-sm-10">@Html.DisplayFor(model => model.FournisseursClass.Name)</dd>
     </dl>
+
+    <div>
+        <form asp-controller="Panier" asp-action="AjouterAuPanier" method="post">
+            <input type="hidden" name="articleId" value="@Model.Id" />
+            <label for="quantite">Quantité :</label>
+            <input type="number" name="quantite" id="quantite" value="1" min="1" max="@Model.QuantityStock" />
+            <button type="submit" class="btn btn-success">Commander</button>
+        </form>
+
+
+    </div>
 </div>
+
 <div>
-    <a asp-action="Index">Retour au catalogue</a>
+    <a class="btn btn-secondary" asp-action="Index">Retour au catalogue</a>
 </div>

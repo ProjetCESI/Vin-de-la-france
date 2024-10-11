@@ -23,5 +23,6 @@ namespace Vin_de_la_france_2.Models
         public int FournisseursClassId { get; set; }
         public virtual FamillesClass FamillesClass { get; set; }
         public virtual FournisseursClass FournisseursClass { get; set; }
+        public virtual ICollection<LigneCommandeClientsClass> LigneCommandeClientsClass { get; set; }
     }
 }

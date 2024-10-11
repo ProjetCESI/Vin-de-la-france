@@ -54,11 +54,5 @@ namespace Vin_de_la_france_2.Controllers
             byte[] imageBytes = Convert.FromBase64String(article.Image);
             return File(imageBytes, "image/png");
         }
-
-
-        private bool ArticlesClassExists(int id)
-        {
-            return _context.ArticlesClasses.Any(e => e.Id == id);
-        }
     }
 }

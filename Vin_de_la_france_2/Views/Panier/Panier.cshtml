@@ -1,0 +1,48 @@
+﻿<h1>Mon Panier</h1>
+
+@if (Model != null && Model.LigneCommandeClientsClass != null && Model.LigneCommandeClientsClass.Count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Sous-total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ligne in Model.LigneCommandeClientsClass)
+            {
+                <tr>
+                    <td>@ligne.ArticlesClass.Name</td>
+                    <td>
+                        <form asp-action="MettreAJourQuantite" method="post">
+                            <input type="hidden" name="ligneCommandeId" value="@ligne.Id" />
+                            <input type="number" name="quantite" value="@ligne.Quantite" min="1" />
+                            <button type="submit" class="btn btn-secondary">Mettre à jour</button>
+                        </form>
+                    </td>
+                    <td>@ligne.PrixUnitaire €</td>
+                    <td>@(ligne.PrixUnitaire * ligne.Quantite) €</td>
+                    <td>
+                        <form asp-action="SupprimerDuPanier" method="post">
+                            <input type="hidden" name="ligneCommandeId" value="@ligne.Id" />
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <a class="btn btn-success" asp-action="ValiderCommande">Valider la commande</a>
+    </div>
+}
+
+else
+{
+    <p>Votre panier est vide.</p>
+}

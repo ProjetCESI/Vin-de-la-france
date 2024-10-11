@@ -1,17 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Vin_de_la_france_2.Models;
 
-namespace Vin_de_la_france_2.Data // Assurez-vous que l'espace de noms est correct
+namespace Vin_de_la_france_2.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
-        // DbSets
         public DbSet<ArticlesClass> ArticlesClasses { get; set; }
         public DbSet<FamillesClass> FamillesClasses { get; set; }
         public DbSet<FournisseursClass> FournisseursClasses { get; set; }
+        public DbSet<ClientsClass> ClientsClasses { get; set; }
+        public DbSet<CommandeClientsClass> CommandeClientsClasses { get; set; }
+        public DbSet<LigneCommandeClientsClass> LigneCommandeClientsClasses { get; set; }
     }
 }
