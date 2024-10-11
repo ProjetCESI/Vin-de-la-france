@@ -16,5 +16,7 @@ namespace Vin_de_la_france_2.Data
         public DbSet<ClientsClass> ClientsClasses { get; set; }
         public DbSet<CommandeClientsClass> CommandeClientsClasses { get; set; }
         public DbSet<LigneCommandeClientsClass> LigneCommandeClientsClasses { get; set; }
+        public DbSet<CommandeFournisseursClass> commandeFournisseursClasses { get; set; }
+        public DbSet<LigneCommandeFournisseursClass> LigneCommandeFournisseursClasses { get; set; }
     }
 }
