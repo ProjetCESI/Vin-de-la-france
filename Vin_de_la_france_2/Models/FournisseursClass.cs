@@ -14,7 +14,12 @@ namespace Vin_de_la_france_2.Models
 
         [Required]
         public string Name { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
 
         public virtual ICollection<ArticlesClass> ArticlesClasses { get; set; }
+        public virtual ICollection<CommandeFournisseursClass> CommandeFournisseursClass { get; set; }
+
     }
 }
