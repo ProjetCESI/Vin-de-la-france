@@ -23,7 +23,7 @@ namespace VinWpf.Views
 
         private void LoadArticleDetails(int articleId)
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var article = context.ArticlesClass.FirstOrDefault(a => a.Id == articleId);
 
@@ -45,7 +45,7 @@ namespace VinWpf.Views
         {
             if (int.TryParse(QuantiteCommandeTextBox.Text, out int quantiteCommande) && quantiteCommande > 0)
             {
-                using (var context = new PhishingContext())
+                using (var context = new VinContext())
                 {
                     var article = context.ArticlesClass.FirstOrDefault(a => a.Id == articleId);
 

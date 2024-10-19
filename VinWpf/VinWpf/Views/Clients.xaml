@@ -46,7 +46,7 @@
             <TextBox TextAlignment="Center" x:Name="TextBoxClientAddress" Width="200" Height="20"/>
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Téléphone:</TextBlock>
-            <TextBox TextAlignment="Center" x:Name="TextBoxClientPhone" Width="200" Height="20"/>
+            <TextBox PreviewTextInput="NumberValidationTextBox" TextAlignment="Center" x:Name="TextBoxClientPhone" Width="200" Height="20"/>
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Email:</TextBlock>
             <TextBox TextAlignment="Center" x:Name="TextBoxClientEmail" Width="200" Height="20"/>

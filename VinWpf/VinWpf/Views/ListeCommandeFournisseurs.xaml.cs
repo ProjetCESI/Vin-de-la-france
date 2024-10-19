@@ -26,7 +26,7 @@ namespace VinWpf.Views
 
         private void LoadCommandes()
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var commandes = context.CommandeFournisseursClass.ToList();
                 Commandes.Clear();
@@ -64,7 +64,7 @@ namespace VinWpf.Views
                 var commandeViewModel = button.DataContext as CommandeFournisseurViewModel;
                 if (commandeViewModel != null)
                 {
-                    using (var context = new PhishingContext())
+                    using (var context = new VinContext())
                     {
                         var result = MessageBox.Show("Êtes-vous sûr de vouloir changer le statut de cette commande ?",
                                                      "Confirmation",
@@ -141,7 +141,7 @@ namespace VinWpf.Views
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        using (var context = new PhishingContext())
+                        using (var context = new VinContext())
                         {
                             var commande = context.CommandeFournisseursClass.FirstOrDefault(c => c.Id == commandeViewModel.Id);
                             if (commande != null)

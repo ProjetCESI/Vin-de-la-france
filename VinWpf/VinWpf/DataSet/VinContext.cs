@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VinWpf.DataSet
 {
-    internal class PhishingContext : DbContext
+    internal class VinContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

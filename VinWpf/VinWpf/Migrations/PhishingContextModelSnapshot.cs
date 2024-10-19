@@ -10,7 +10,7 @@ using VinWpf.DataSet;
 
 namespace VinWpf.Migrations
 {
-    [DbContext(typeof(PhishingContext))]
+    [DbContext(typeof(VinContext))]
     partial class PhishingContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

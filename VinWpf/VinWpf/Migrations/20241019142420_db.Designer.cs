@@ -11,8 +11,8 @@ using VinWpf.DataSet;
 
 namespace VinWpf.Migrations
 {
-    [DbContext(typeof(PhishingContext))]
-    [Migration("20241009125326_db")]
+    [DbContext(typeof(VinContext))]
+    [Migration("20241019142420_db")]
     partial class db
     {
         /// <inheritdoc />

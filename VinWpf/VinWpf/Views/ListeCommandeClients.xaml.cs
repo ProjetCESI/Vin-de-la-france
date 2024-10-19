@@ -26,7 +26,7 @@ namespace VinWpf.Views
 
         private void LoadCommandes()
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 Commandes = context.CommandeClientsClass
                     .Include(c => c.ClientsClass)
@@ -59,7 +59,7 @@ namespace VinWpf.Views
         {
             try
             {
-                using (var context = new PhishingContext())
+                using (var context = new VinContext())
                 {
                     var commandesInDb = context.CommandeClientsClass
                         .Include(c => c.ClientsClass)
@@ -84,7 +84,7 @@ namespace VinWpf.Views
                                         var article = context.ArticlesClass.FirstOrDefault(a => a.Id == ligne.ArticlesClassId);
                                         if (article != null)
                                         {
-                                            article.QuantityStock += ligne.Quantite; 
+                                            article.QuantityStock += ligne.Quantite;
                                         }
                                     }
                                 }
@@ -101,6 +101,11 @@ namespace VinWpf.Views
                                         if (article != null)
                                         {
                                             article.QuantityStock -= ligne.Quantite;
+
+                                            if (article.QuantityStock < article.MinimumThreshold)
+                                            {
+                                                CreateSupplierOrder(context, article);
+                                            }
                                         }
                                     }
                                 }
@@ -121,5 +126,35 @@ namespace VinWpf.Views
                 MessageTextBlock.Foreground = Brushes.Red;
             }
         }
+
+        private void CreateSupplierOrder(VinContext context, ArticlesClass article)
+        {
+            var newSupplierOrder = new CommandeFournisseursClass
+            {
+                Date = DateTime.Now,
+                Statut = "En attente",
+                FournisseursClassId = GetDefaultFournisseurId(context)
+            };
+
+            context.CommandeFournisseursClass.Add(newSupplierOrder);
+            context.SaveChanges(); 
+
+            var ligneCommande = new LigneCommandeFournisseursClass
+            {
+                Quantite = article.MinimumThreshold - article.QuantityStock, 
+                PrixUnitaire = article.UnitPrice, 
+                CommandeFournisseursClassId = newSupplierOrder.Id,
+                ArticlesClassId = article.Id 
+            };
+
+            context.LigneCommandeFournisseursClass.Add(ligneCommande);
+        }
+
+        private int GetDefaultFournisseurId(VinContext context)
+        {
+            return context.FournisseursClass.FirstOrDefault()?.Id ?? 0;
+        }
+
+
     }
 }

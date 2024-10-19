@@ -22,7 +22,7 @@ namespace VinWpf.Views
 
         private void LoadClients()  
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var clients = context.ClientsClass.ToList();
                 ClientsList.Clear();
@@ -67,7 +67,7 @@ namespace VinWpf.Views
                 return;
             }
 
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 bool addressExists = context.ClientsClass.Any(u => u.Address == TextBoxClientAddress.Text);
                 bool emailExists = context.ClientsClass.Any(u => u.Email == TextBoxClientEmail.Text);
@@ -130,7 +130,7 @@ namespace VinWpf.Views
 
         private void UpdateClient_Click(object sender, RoutedEventArgs e)
         {
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 if (string.IsNullOrEmpty(TextBoxClientName.Text))
                 {
@@ -231,7 +231,7 @@ namespace VinWpf.Views
             {
                 var clientId = (int)((Button)sender).Tag;
 
-                using (PhishingContext context = new PhishingContext())
+                using (VinContext context = new VinContext())
                 {
                     var clientToDelete = context.ClientsClass.FirstOrDefault(c => c.Id == clientId);   
                     context.ClientsClass.Remove(clientToDelete);
@@ -250,6 +250,10 @@ namespace VinWpf.Views
                     CancelUpdateClientButton.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+        private void NumberValidationTextBox(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !decimal.TryParse(e.Text, out _);
         }
     }
 }

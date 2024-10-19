@@ -43,7 +43,7 @@ namespace VinWpf.Views
 
         private void LoadArticles()
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var articles = context.ArticlesClass
                                       .Include(a => a.FamillesClass)
@@ -80,7 +80,7 @@ namespace VinWpf.Views
         }
         private void LoadComboBoxArticlesFamilleID()
         {
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 List<FamillesClass> familleList = context.FamillesClass.ToList();
                 FamilleClass.Clear();
@@ -108,7 +108,7 @@ namespace VinWpf.Views
 
         private void LoadComboboxFournisseurID()
         {
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 List<FournisseursClass> fournisseursList = context.FournisseursClass.ToList();
                 fournisseursClass.Clear();
@@ -137,7 +137,7 @@ namespace VinWpf.Views
         {
             if (ValidateArticleInput())
             {
-                using (var context = new PhishingContext())
+                using (var context = new VinContext())
                 {
                     if (context.ArticlesClass.Any(c => c.Name == TextBoxArticlesName.Text))
                     {
@@ -180,7 +180,7 @@ namespace VinWpf.Views
         {
             if (ValidateArticleInput())
             {
-                using (var context = new PhishingContext())
+                using (var context = new VinContext())
                 {
                     var articleToUpdate = context.ArticlesClass.FirstOrDefault(a => a.Id == editArticle.Id);
 
@@ -210,7 +210,7 @@ namespace VinWpf.Views
 
             if (MessageBox.Show("Voulez-vous vraiment supprimer cet article ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                using (var context = new PhishingContext())
+                using (var context = new VinContext())
                 {
                     var articleToDelete = context.ArticlesClass.FirstOrDefault(a => a.Id == articleId);
                     if (articleToDelete != null)

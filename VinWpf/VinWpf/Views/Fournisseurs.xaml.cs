@@ -33,7 +33,7 @@ namespace VinWpf.Views
 
         private void LoadFournisseurs()
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var Fournisseurs = context.FournisseursClass.ToList();
                 FournisseursList.Clear();
@@ -78,7 +78,7 @@ namespace VinWpf.Views
                 return;
             }
 
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 bool addressExists = context.FournisseursClass.Any(u => u.Address == TextBoxFournisseursAddress.Text);
                 bool emailExists = context.FournisseursClass.Any(u => u.Email == TextBoxFournisseursEmail.Text);
@@ -141,7 +141,7 @@ namespace VinWpf.Views
 
         private void UpdateFournisseurs_Click(object sender, RoutedEventArgs e)
         {
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 if (string.IsNullOrEmpty(TextBoxFournisseursName.Text))
                 {
@@ -242,7 +242,7 @@ namespace VinWpf.Views
             {
                 var FournisseursId = (int)((Button)sender).Tag;
 
-                using (PhishingContext context = new PhishingContext())
+                using (VinContext context = new VinContext())
                 {
                     var FournisseursToDelete = context.FournisseursClass.FirstOrDefault(c => c.Id == FournisseursId);
                     context.FournisseursClass.Remove(FournisseursToDelete);
@@ -261,6 +261,10 @@ namespace VinWpf.Views
                     CancelUpdateFournisseursButton.Visibility = Visibility.Collapsed;
                 }
             }
+        }
+        private void NumberValidationTextBox(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = !decimal.TryParse(e.Text, out _);
         }
     }
 }

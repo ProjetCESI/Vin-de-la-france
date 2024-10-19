@@ -22,7 +22,7 @@ namespace VinWpf.Views
 
         private void LoadFamilles()
         {
-            using (var context = new PhishingContext())
+            using (var context = new VinContext())
             {
                 var familles = context.FamillesClass.ToList();
                 FamillesList.Clear();
@@ -43,7 +43,7 @@ namespace VinWpf.Views
                 return;
             }
 
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 bool nameExists = context.FamillesClass.Any(u => u.Name == TextBoxFamillesName.Text);
                 if (nameExists)
@@ -81,7 +81,7 @@ namespace VinWpf.Views
 
         private void UpdateFamilles_Click(object sender, RoutedEventArgs e)
         {
-            using (PhishingContext context = new PhishingContext())
+            using (VinContext context = new VinContext())
             {
                 if (string.IsNullOrEmpty(TextBoxFamillesName.Text))
                 {
@@ -133,7 +133,7 @@ namespace VinWpf.Views
             {
                 var familleId = (int)((Button)sender).Tag;
 
-                using (PhishingContext context = new PhishingContext())
+                using (VinContext context = new VinContext())
                 {
                     var familleToDelete = context.FamillesClass.FirstOrDefault(c => c.Id == familleId);
                     context.FamillesClass.Remove(familleToDelete);
