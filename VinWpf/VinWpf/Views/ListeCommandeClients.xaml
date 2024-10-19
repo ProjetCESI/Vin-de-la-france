@@ -12,13 +12,29 @@
         <StackPanel>
             <TextBlock Text="Liste des commandes en cours:" FontWeight="Bold" Margin="10,0,0,0"/>
 
-            <DataGrid x:Name="CommandesDataGrid" AutoGenerateColumns="False" Height="350" ItemsSource="{Binding Commandes}" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid x:Name="CommandesDataGrid" AutoGenerateColumns="False" Height="auto" ItemsSource="{Binding Commandes}" CanUserAddRows="False" IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Commande ID" Binding="{Binding Id}" Width="100"/>
                     <DataGridTextColumn Header="Client" Binding="{Binding ClientsClass.Name}" Width="200"/>
                     <DataGridTextColumn Header="Date" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy\}}" Width="150"/>
                     <DataGridTextColumn Header="Statut" Binding="{Binding Statut}" Width="150"/>
-                    <DataGridTemplateColumn Header="Statut" Width="150">
+                    <DataGridTextColumn Header="Prix Total" Binding="{Binding PrixTotal, StringFormat=C}" Width="120"/>
+                    <DataGridTemplateColumn Header="Articles" Width="400">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DataGrid ItemsSource="{Binding LigneCommandes}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" Height="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Article" Binding="{Binding ArticlesClass.Name}" Width="120"/>
+                                        <DataGridTextColumn Header="Famille" Binding="{Binding ArticlesClass.FamillesClass.Name}" Width="120"/>
+                                        <DataGridTextColumn Header="Fournisseur" Binding="{Binding ArticlesClass.FournisseursClass.Name}" Width="120"/>
+                                        <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" Width="80"/>
+                                        <DataGridTextColumn Header="Prix Unitaire" Binding="{Binding PrixUnitaire, StringFormat=C}" Width="100"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Changer Statut" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Changer Statut" Click="UpdateStatus_Click" Tag="{Binding}" Width="120"/>

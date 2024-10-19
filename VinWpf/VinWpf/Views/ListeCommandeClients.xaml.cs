@@ -30,11 +30,18 @@ namespace VinWpf.Views
             {
                 Commandes = context.CommandeClientsClass
                     .Include(c => c.ClientsClass)
+                    .Include(c => c.LigneCommandes)
+                        .ThenInclude(l => l.ArticlesClass)
+                            .ThenInclude(a => a.FamillesClass)
+                    .Include(c => c.LigneCommandes)
+                        .ThenInclude(l => l.ArticlesClass)
+                            .ThenInclude(a => a.FournisseursClass)
                     .ToList();
             }
 
             CommandesDataGrid.ItemsSource = Commandes;
         }
+
 
         private void UpdateStatus_Click(object sender, RoutedEventArgs e)
         {
@@ -154,7 +161,5 @@ namespace VinWpf.Views
         {
             return context.FournisseursClass.FirstOrDefault()?.Id ?? 0;
         }
-
-
     }
 }

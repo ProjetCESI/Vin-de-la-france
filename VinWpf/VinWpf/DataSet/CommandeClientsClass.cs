@@ -16,5 +16,9 @@ namespace VinWpf.DataSet
         [ForeignKey("ClientsClass")]
         public int ClientsClassId { get; set; }
         public virtual ClientsClass ClientsClass { get; set; }
+
+        public virtual ICollection<LigneCommandeClientsClass> LigneCommandes { get; set; }
+
+        public decimal PrixTotal => LigneCommandes?.Sum(l => l.PrixUnitaire * l.Quantite) ?? 0;
     }
 }
