@@ -13,7 +13,7 @@ namespace Vin_de_la_france_2.Data
         public DbSet<ArticlesClass> ArticlesClasses { get; set; }
         public DbSet<FamillesClass> FamillesClasses { get; set; }
         public DbSet<FournisseursClass> FournisseursClasses { get; set; }
-        public DbSet<ClientsClass> ClientsClasses { get; set; }
+        public DbSet<ClientsClass> ClientsClass { get; set; }
         public DbSet<CommandeClientsClass> CommandeClientsClasses { get; set; }
         public DbSet<LigneCommandeClientsClass> LigneCommandeClientsClasses { get; set; }
         public DbSet<CommandeFournisseursClass> commandeFournisseursClasses { get; set; }

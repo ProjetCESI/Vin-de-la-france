@@ -11,7 +11,7 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(VinContext))]
-    partial class PhishingContextModelSnapshot : ModelSnapshot
+    partial class VinContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,10 @@ namespace VinWpf.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -270,7 +274,7 @@ namespace VinWpf.Migrations
             modelBuilder.Entity("VinWpf.DataSet.CommandeClientsClass", b =>
                 {
                     b.HasOne("VinWpf.DataSet.ClientsClass", "ClientsClass")
-                        .WithMany()
+                        .WithMany("CommandeClientsClasses")
                         .HasForeignKey("ClientsClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -298,7 +302,7 @@ namespace VinWpf.Migrations
                         .IsRequired();
 
                     b.HasOne("VinWpf.DataSet.CommandeClientsClass", "CommandeClientsClass")
-                        .WithMany()
+                        .WithMany("LigneCommandes")
                         .HasForeignKey("CommandeClientsClassId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -325,6 +329,16 @@ namespace VinWpf.Migrations
                     b.Navigation("ArticlesClass");
 
                     b.Navigation("CommandeFournisseursClass");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.ClientsClass", b =>
+                {
+                    b.Navigation("CommandeClientsClasses");
+                });
+
+            modelBuilder.Entity("VinWpf.DataSet.CommandeClientsClass", b =>
+                {
+                    b.Navigation("LigneCommandes");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Vin_de_la_france_2.Data;
 using Vin_de_la_france_2.Models;
 
@@ -9,11 +10,20 @@ namespace Vin_de_la_france_2.Services
     public class PanierService
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public PanierService(ApplicationDbContext context)
+        public PanierService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor;
         }
+
+        private bool IsClientLoggedIn()
+        {
+            var clientIdString = _httpContextAccessor.HttpContext.Session.GetString("ClientId");
+            return !string.IsNullOrEmpty(clientIdString);
+        }
+
 
         public int GetPanierCount()
         {
@@ -28,12 +38,24 @@ namespace Vin_de_la_france_2.Services
         }
 
 
+        private int GetCurrentClientId()
+        {
+            var clientIdString = _httpContextAccessor.HttpContext.Session.GetString("ClientId");
+            if (int.TryParse(clientIdString, out int clientId))
+            {
+                return clientId;
+            }
+            throw new InvalidOperationException("Aucun client n'est connecté.");
+        }
+
         public CommandeClientsClass GetPanier()
         {
+            var clientId = GetCurrentClientId();
+
             var panier = _context.CommandeClientsClasses
                 .Include(c => c.LigneCommandeClientsClass)
                 .ThenInclude(l => l.ArticlesClass)
-                .FirstOrDefault(c => c.Statut == "En cours");
+                .FirstOrDefault(c => c.Statut == "En cours" && c.ClientsClassId == clientId);
 
             if (panier == null)
             {
@@ -41,7 +63,7 @@ namespace Vin_de_la_france_2.Services
                 {
                     Date = DateTime.Now,
                     Statut = "En cours",
-                    ClientsClassId = 1
+                    ClientsClassId = clientId
                 };
                 _context.CommandeClientsClasses.Add(panier);
                 _context.SaveChanges();
@@ -84,8 +106,6 @@ namespace Vin_de_la_france_2.Services
             {
             }
         }
-
-
         public void MettreAJourQuantite(int ligneCommandeId, int quantite)
         {
             var ligneCommande = _context.LigneCommandeClientsClasses.Find(ligneCommandeId);

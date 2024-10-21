@@ -15,7 +15,6 @@ namespace Vin_de_la_france_2.Services
         {
             _context = context;
         }
-
         public int GetPanierCount()
         {
             var panier = GetPanier();
@@ -27,7 +26,6 @@ namespace Vin_de_la_france_2.Services
 
             return panier.LigneCommandeClientsClass.Sum(l => l.Quantite);
         }
-
         public CommandeClientsClass GetPanier()
         {
             var panier = _context.CommandeClientsClasses
@@ -48,8 +46,6 @@ namespace Vin_de_la_france_2.Services
 
             return panier;
         }
-
-
         public void AjouterArticle(int articleId, int quantite)
         {
 
@@ -86,8 +82,6 @@ namespace Vin_de_la_france_2.Services
             {
             }
         }
-
-
 
         public void MettreAJourQuantite(int ligneCommandeId, int quantite)
         {

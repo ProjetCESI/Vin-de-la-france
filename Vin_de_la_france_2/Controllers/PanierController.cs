@@ -21,23 +21,20 @@ namespace Vin_de_la_france_2.Controllers
 
 
         [HttpPost]
-        public IActionResult AjouterAuPanier(int articleId, int quantite = 1)
+        public IActionResult AjouterAuPanier(int articleId, int quantite)
         {
-
-            if (quantite < 1)
+            var clientIdString = HttpContext.Session.GetString("ClientId");
+            if (string.IsNullOrEmpty(clientIdString))
             {
-                ModelState.AddModelError("", "La quantité doit être au moins 1.");
-                return RedirectToAction("Details", new { id = articleId });
+                TempData["ErrorMessage"] = "Vous devez être connecté pour ajouter des articles au panier.";
+                return RedirectToAction("Login", "Account");
             }
 
-            _panierService.AjouterArticle(articleId, quantite);
+            int clientId = int.Parse(clientIdString);
 
-            return RedirectToAction("Index");
+            TempData["SuccessMessage"] = "L'article a été ajouté au panier avec succès.";
+            return RedirectToAction("Index", "Panier");
         }
-
-
-
-
 
         public IActionResult MettreAJourQuantite(int ligneCommandeId, int quantite)
         {
@@ -56,7 +53,5 @@ namespace Vin_de_la_france_2.Controllers
             _panierService.ValiderCommande();
             return RedirectToAction("Index");
         }
-
-
     }
 }

@@ -39,16 +39,21 @@
         <dd class="col-sm-10">@Html.DisplayFor(model => model.FournisseursClass.Name)</dd>
     </dl>
 
-    <div>
-        <form asp-controller="Panier" asp-action="AjouterAuPanier" method="post">
-            <input type="hidden" name="articleId" value="@Model.Id" />
-            <label for="quantite">Quantité :</label>
-            <input type="number" name="quantite" id="quantite" value="1" min="1" max="@Model.QuantityStock" />
-            <button type="submit" class="btn btn-success">Commander</button>
-        </form>
-
-
-    </div>
+    @if (Context.Session.GetString("ClientId") != null)
+    {
+        <div>
+            <form asp-controller="Panier" asp-action="AjouterAuPanier" method="post">
+                <input type="hidden" name="articleId" value="@Model.Id" />
+                <label for="quantite">Quantité :</label>
+                <input type="number" name="quantite" id="quantite" value="1" min="1" max="@Model.QuantityStock" />
+                <button type="submit" class="btn btn-success">Commander</button>
+            </form>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            Vous devez être connecté pour ajouter des articles au panier. <a href="@Url.Action("Login", "Account")">Connectez-vous</a>.
+        </div>
+    }
 </div>
-
-
