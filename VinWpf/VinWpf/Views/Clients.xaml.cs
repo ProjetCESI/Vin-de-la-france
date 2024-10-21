@@ -67,6 +67,14 @@ namespace VinWpf.Views
                 return;
             }
 
+            if (string.IsNullOrEmpty(TextBoxClientPassword.Text))
+            {
+                AddClientMessage.Foreground = new SolidColorBrush(Colors.Red);
+                AddClientMessage.Text = "Veuillez entrer le mot de passe du client.";
+                DataGridClientMessage.Text = "";
+                return;
+            }
+
             using (VinContext context = new VinContext())
             {
                 bool addressExists = context.ClientsClass.Any(u => u.Address == TextBoxClientAddress.Text);
@@ -98,7 +106,8 @@ namespace VinWpf.Views
                     Name = TextBoxClientName.Text,
                     Address = TextBoxClientAddress.Text,
                     Phone = TextBoxClientPhone.Text,
-                    Email = TextBoxClientEmail.Text
+                    Email = TextBoxClientEmail.Text,
+                    Password = TextBoxClientPassword.Text
                 });
                 context.SaveChanges();
                 LoadClients();
@@ -108,6 +117,7 @@ namespace VinWpf.Views
                 TextBoxClientAddress.Text = "";
                 TextBoxClientPhone.Text = "";
                 TextBoxClientEmail.Text = "";
+                TextBoxClientPassword.Text = "";
             }
         }
 
@@ -120,6 +130,7 @@ namespace VinWpf.Views
             TextBoxClientAddress.Text = editClient.Address;
             TextBoxClientPhone.Text = editClient.Phone;
             TextBoxClientEmail.Text = editClient.Email;
+            TextBoxClientPassword.Text = editClient.Password;
 
             AddClientMessage.Text = "";
             AddEditClientText.Text = "Modifier le client";
@@ -164,6 +175,14 @@ namespace VinWpf.Views
                     return;
                 }
 
+                if (string.IsNullOrEmpty(TextBoxClientPassword.Text))
+                {
+                    AddClientMessage.Foreground = new SolidColorBrush(Colors.Red);
+                    AddClientMessage.Text = "Veuillez entrer le mot de passe du client.";
+                    DataGridClientMessage.Text = "";
+                    return;
+                }
+
                 bool addressExists = context.ClientsClass.Any(u => u.Address == TextBoxClientAddress.Text && u.Id != editClient.Id);
                 bool emailExists = context.ClientsClass.Any(u => u.Email == TextBoxClientEmail.Text && u.Id != editClient.Id);
                 bool phoneExists = context.ClientsClass.Any(u => u.Phone == TextBoxClientPhone.Text && u.Id != editClient.Id);
@@ -194,6 +213,7 @@ namespace VinWpf.Views
                 ClientUpdate.Address = TextBoxClientAddress.Text;
                 ClientUpdate.Phone = TextBoxClientPhone.Text;
                 ClientUpdate.Email = TextBoxClientEmail.Text;
+                ClientUpdate.Password = TextBoxClientPassword.Text;
 
                 context.SaveChanges();
                 LoadClients();
@@ -204,6 +224,7 @@ namespace VinWpf.Views
                 TextBoxClientAddress.Text = "";
                 TextBoxClientPhone.Text = "";
                 TextBoxClientEmail.Text = "";
+                TextBoxClientPassword.Text = "";
                 AddEditClientText.Text = "Ajouter un client";
                 UpdateClientButton.Visibility = Visibility.Collapsed;
                 AddClientButton.Visibility = Visibility.Visible;
@@ -217,6 +238,7 @@ namespace VinWpf.Views
             TextBoxClientAddress.Text = "";
             TextBoxClientPhone.Text = "";
             TextBoxClientEmail.Text = "";
+            TextBoxClientPassword.Text = "";
             AddClientMessage.Text = "";
             AddEditClientText.Text = "Ajouter un client";
             DataGridClientMessage.Text = "";
@@ -244,6 +266,7 @@ namespace VinWpf.Views
                     TextBoxClientPhone.Text = "";
                     TextBoxClientEmail.Text = "";
                     AddClientMessage.Text = "";
+                    TextBoxClientPassword.Text = "";
                     AddEditClientText.Text = "Ajouter un client";
                     UpdateClientButton.Visibility = Visibility.Collapsed;
                     AddClientButton.Visibility = Visibility.Visible;

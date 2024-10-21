@@ -21,6 +21,7 @@
                     <DataGridTextColumn Header="Adresse" Binding="{Binding Address}" Width="*"/>
                     <DataGridTextColumn Header="Téléphone" Binding="{Binding Phone}" Width="*"/>
                     <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                    <DataGridTextColumn Header="Mot de passe" Binding="{Binding Password}" Width="*"/>
                     <DataGridTemplateColumn Header="Action" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -50,6 +51,9 @@
 
             <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Email:</TextBlock>
             <TextBox TextAlignment="Center" x:Name="TextBoxClientEmail" Width="200" Height="20"/>
+
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5" FontSize="14">Mot de passe:</TextBlock>
+            <TextBox TextAlignment="Center" x:Name="TextBoxClientPassword" Width="200" Height="20"/>
 
             <Button Content="Ajouter" Width="100" x:Name="AddClientButton" Click="AddClient_Click" Margin="5"/>
             <Button Visibility="Collapsed" Content="Modifier" Width="100" x:Name="UpdateClientButton" Click="UpdateClient_Click" Margin="5"/>
