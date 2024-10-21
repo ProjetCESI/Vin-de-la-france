@@ -1,0 +1,15 @@
+Entités :
+1. Client(idClient, nom, prenom, email, telephone, adresse)
+2. Fournisseur(idFournisseur, nom, contact, email, telephone, adresse)
+3. Article(idArticle, nom, description, prixUnitaire, prixCarton, quantiteDisponible, idFamille)
+4. CommandeClient(idCommande, dateCommande, statut, idClient)
+5. CommandeFournisseur(idCommandeFournisseur, dateCommande, statut, idFournisseur)
+6. Inventaire(idInventaire, dateInventaire)
+7. Famille(idFamille, nomFamille)
+
+Relations :
+- Client (1) ---- (N) CommandeClient
+- Fournisseur (1) ---- (N) CommandeFournisseur
+- Article (N) ---- (1) Famille
+- CommandeClient (N) ---- (N) Article
+- CommandeFournisseur (N) ---- (N) Article

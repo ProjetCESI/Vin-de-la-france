@@ -1,0 +1,74 @@
+
+# Procédure d'installation de l'application de gestion de stock - VinDeLaFronce
+
+## Pré-requis :
+- **Système d'exploitation :** Windows
+- **Plateforme de développement :** Visual Studio 2019 ou supérieur
+- **Langage :** .NET Core (version 3.1 ou supérieure)
+- **Base de données :** PostgreSQL
+- **Outils nécessaires :**
+  - Docker (facultatif pour environnement PostgreSQL)
+  - pgAdmin (pour la gestion de la base de données)
+  - Git (pour cloner le repository du projet)
+  - Swagger (pour la documentation API)
+
+---
+
+## Étapes d'installation
+
+### 1. Clonage du repository
+   - Ouvrir PowerShell ou un terminal Git Bash.
+   - Exécuter la commande suivante pour cloner le repository contenant le projet :
+     ```bash
+     git clone https://github.com/username/VinDeLaFronce.git
+     ```
+
+### 2. Configuration de la base de données PostgreSQL
+   - **Option 1 :** Installer PostgreSQL en local via pgAdmin ou un autre gestionnaire de base de données.
+   - **Option 2 :** Utiliser Docker pour créer une instance PostgreSQL :
+     ```bash
+     docker run --name vdlafronce-db -e POSTGRES_PASSWORD=yourpassword -d postgres
+     ```
+   - Créer la base de données avec le script fourni (script dans le fichier SQL `VinDeLaFronce.sql`):
+     ```sql
+     CREATE DATABASE "VinDeLaFronce" WITH OWNER = postgres ENCODING = 'UTF8';
+     ```
+
+### 3. Installation des dépendances
+   - Ouvrir le projet avec Visual Studio.
+   - Restaurer les packages NuGet nécessaires avec :
+     ```bash
+     dotnet restore
+     ```
+
+### 4. Configuration de la chaîne de connexion
+   - Dans `appsettings.json`, configurer la chaîne de connexion à PostgreSQL :
+     ```json
+     {
+       "ConnectionStrings": {
+         "DefaultConnection": "Host=localhost;Database=VinDeLaFronce;Username=postgres;Password=yourpassword;"
+       }
+     }
+     ```
+
+### 5. Initialisation de la base de données
+   - Exécuter les migrations Entity Framework pour initialiser la base de données :
+     ```bash
+     dotnet ef database update
+     ```
+
+### 6. Exécution de l'application
+   - Compiler et exécuter l'application depuis Visual Studio ou en ligne de commande :
+     ```bash
+     dotnet run
+     ```
+
+### 7. Accès à la documentation API
+   - Swagger sera disponible à l'URL suivante après le démarrage de l'application :
+     ```
+     http://localhost:5000/swagger
+     ```
+
+### Bonus (Site web)
+   - Si le site web e-commerce est inclus, assurez-vous que les dépendances Front-End (comme Angular/React) sont correctement installées.
+   - Démarrez le front-end avec `npm start` ou équivalent selon les technologies utilisées.

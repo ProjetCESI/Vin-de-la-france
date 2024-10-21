@@ -1,0 +1,77 @@
+@startuml
+class Client {
+    +idClient: int
+    +nom: string
+    +prenom: string
+    +email: string
+    +telephone: string
+    +adresse: string
+    +creerCommande()
+    +modifierInformation()
+}
+
+class Fournisseur {
+    +idFournisseur: int
+    +nom: string
+    +contact: string
+    +email: string
+    +telephone: string
+    +adresse: string
+    +passerCommande()
+    +modifierInformation()
+}
+
+class Article {
+    +idArticle: int
+    +nom: string
+    +description: string
+    +prixUnitaire: float
+    +prixCarton: float
+    +quantiteDisponible: int
+    +famille: string
+    +mettreAJourStock()
+    +consulterDetails()
+}
+
+class CommandeClient {
+    +idCommande: int
+    +dateCommande: Date
+    +statut: string
+    +idClient: int
+    +listeArticles: List<Article>
+    +calculerTotal()
+    +modifierStatut()
+}
+
+class CommandeFournisseur {
+    +idCommandeFournisseur: int
+    +dateCommande: Date
+    +statut: string
+    +idFournisseur: int
+    +listeArticles: List<Article>
+    +passerCommande()
+    +modifierStatut()
+}
+
+class Inventaire {
+    +idInventaire: int
+    +dateInventaire: Date
+    +listeArticlesInventorie: List<Article>
+    +regulariserStock()
+    +consulterInventaire()
+}
+
+class Famille {
+    +idFamille: int
+    +nomFamille: string
+    +ajouterArticle()
+    +supprimerArticle()
+}
+
+Client "1" -- "*" CommandeClient
+Fournisseur "1" -- "*" CommandeFournisseur
+Article "*" -- "1" Famille
+CommandeClient "*" -- "*" Article
+CommandeFournisseur "*" -- "*" Article
+Inventaire "*" -- "*" Article
+@enduml

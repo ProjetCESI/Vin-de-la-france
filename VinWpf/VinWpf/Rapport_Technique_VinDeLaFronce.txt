@@ -1,0 +1,50 @@
+
+# Rapport Technique - Application de Gestion de Stock - VinDeLaFronce
+
+## 1. Introduction
+Ce rapport technique présente l'architecture, les technologies utilisées, et les fonctionnalités implémentées dans l'application de gestion de stock "VinDeLaFronce". 
+
+## 2. Contexte du Projet
+La société "VinDeLaFronce" est un négociant en vin situé en Gascogne. Le gérant, œnologue de métier, souhaite gérer efficacement le stock des produits qu'il propose, en collaboration avec plusieurs domaines viticoles.
+
+## 3. Objectifs du Projet
+- Développer une application permettant de gérer les stocks de vins.
+- Intégrer une interface pour la gestion des commandes fournisseurs et clients.
+- Assurer un suivi de l'inventaire des produits disponibles.
+
+## 4. Fonctionnalités de l'Application
+### 4.1 Module de Gestion des Stocks
+- Création et gestion des clients, fournisseurs, familles de vins (Rouge, Rosé, Blanc, etc.) et articles.
+- Modification des stocks de produits en fonction des ventes.
+- Passation de commandes auprès des fournisseurs.
+
+### 4.2 Module de Gestion d'Inventaire
+- Inventaire des articles disponibles et régularisation des stocks en masse.
+
+### 4.3 Module de Commandes Fournisseurs et Clients
+- Passation de commandes par les clients, même en cas de stock insuffisant.
+- Création automatique de commandes fournisseurs lorsque le stock est insuffisant ou atteint son seuil minimum.
+
+## 5. Architecture Technique
+- **Langage de programmation :** C# avec .NET Core.
+- **Base de données :** PostgreSQL.
+- **Technologies Front-End :** WPF pour l'application de bureau, ASP.NET pour le site web (optionnel).
+- **Outils de développement :** Visual Studio, Swagger pour la documentation API.
+
+## 6. Configuration de l'Environnement
+### 6.1 Pré-requis
+- Windows avec Visual Studio installé.
+- PostgreSQL installé localement ou via Docker.
+
+### 6.2 Installation
+- Clonage du repository du projet.
+- Configuration de la base de données et des dépendances nécessaires.
+- Démarrage de l'application et accès à la documentation API via Swagger.
+
+## 7. Conclusion
+L'application "VinDeLaFronce" répond aux besoins exprimés par le gérant en matière de gestion des stocks et des commandes. Des fonctionnalités supplémentaires peuvent être envisagées pour améliorer l'expérience utilisateur et la gestion des données.
+
+## 8. Livrables
+- Code source disponible dans le repository.
+- Documentation de l'API.
+- Support de présentation pour la soutenance.
