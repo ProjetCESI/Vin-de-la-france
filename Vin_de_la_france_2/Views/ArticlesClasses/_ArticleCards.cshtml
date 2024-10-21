@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Vin_de_la_france_2.Models.ArticlesClass>
+
+<section class="cards">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="@Url.Action("GetArticleImage", "ArticlesClasses", new { id = item.Id })" alt="Image de l'article" width="200" height="200" />
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                <p class="card-text">
+                    Famille: @Html.DisplayFor(modelItem => item.FamillesClass.Name) <br />
+                    Fournisseur: @Html.DisplayFor(modelItem => item.FournisseursClass.Name) <br />
+                    Stock: @Html.DisplayFor(modelItem => item.QuantityStock)
+                </p>
+            </div>
+            <div class="card-foo">
+                <p class="price">Prix : @Html.DisplayFor(modelItem => item.UnitPrice) €</p>
+            </div>
+            <a href="@Url.Action("Details", "ArticlesClasses", new { id = item.Id })" class="stretched-link"></a>
+        </div>
+    }
+</section>

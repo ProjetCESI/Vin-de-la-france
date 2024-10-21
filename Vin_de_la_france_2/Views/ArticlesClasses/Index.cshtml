@@ -1,29 +1,77 @@
 ﻿@model IEnumerable<Vin_de_la_france_2.Models.ArticlesClass>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Catalogue";
 }
 
 <h1 id="catalogue-title">Catalogue</h1>
 
-<section class="cards">
-    @foreach (var item in Model)
-    {
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="@Url.Action("GetArticleImage", "ArticlesClasses", new { id = item.Id })" alt="Image de l'article" width="200" height="200" />
-            <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                <p class="card-text">
-                    Famille: @Html.DisplayFor(modelItem => item.FamillesClass.Name) <br />
-                    Fournisseur: @Html.DisplayFor(modelItem => item.FournisseursClass.Name) <br />
-                    Stock: @Html.DisplayFor(modelItem => item.QuantityStock)
-                </p>
-            </div>
-            <div class="card-foo">
-                <p class="price">Prix : @Html.DisplayFor(modelItem => item.UnitPrice) €</p>
-            </div>
-                <!-- Ajout d'un lien invisible couvrant toute la carte -->
-                <a href="@Url.Action("Details", "ArticlesClasses", new { id = item.Id })" class="stretched-link"></a>
-        </div>
-    }
-</section>
+<div class="form-group">
+    <label for="searchName">Rechercher par nom</label>
+    <input type="text" name="searchName" id="searchName" class="form-control" placeholder="Nom de l'article" />
+</div>
+
+<div class="form-group">
+    <label for="familleId">Filtrer par famille</label>
+    <select name="familleId" id="familleId" class="form-control">
+        <option value="">Toutes les familles</option>
+        @foreach (var famille in ViewBag.FamillesList)
+        {
+            <option value="@famille.Value">@famille.Text</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="minPrice">Prix minimum</label>
+    <input type="number" id="minPrice" name="minPrice" class="form-control" step="10" placeholder="Prix minimum" />
+</div>
+
+<div class="form-group">
+    <label for="maxPrice">Prix maximum</label>
+    <input type="number" id="maxPrice" name="maxPrice" class="form-control" step="10" placeholder="Prix maximum" />
+</div>
+
+<div id="articleContainer">
+    @await Html.PartialAsync("_ArticleCards", Model)
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            function updateArticles() {
+                var searchName = $('#searchName').val();
+                var familleId = $('#familleId').val();
+                var minPrice = $('#minPrice').val();
+                var maxPrice = $('#maxPrice').val();
+
+                $.ajax({
+                    url: '@Url.Action("FilterArticles", "ArticlesClasses")',
+                    type: 'GET',
+                    data: {
+                        searchName: searchName,
+                        familleId: familleId,
+                        minPrice: minPrice,
+                        maxPrice: maxPrice
+                    },
+                    success: function (result) {
+                        $('#articleContainer').html(result);
+                    }
+                });
+            }
+
+            $('#searchName').on('input', function () {
+                updateArticles();
+            });
+
+            $('#familleId').on('change', function () {
+                updateArticles();
+            });
+
+            $('#minPrice, #maxPrice').on('input', function () {
+                updateArticles();
+            });
+        });
+    </script>
+}

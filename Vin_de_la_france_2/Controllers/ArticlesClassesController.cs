@@ -19,11 +19,58 @@ namespace Vin_de_la_france_2.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchName, int? familleId)
         {
-            var applicationDbContext = _context.ArticlesClasses.Include(a => a.FamillesClass).Include(a => a.FournisseursClass);
-            return View(await applicationDbContext.ToListAsync());
+            ViewBag.FamillesList = new SelectList(_context.FamillesClasses, "Id", "Name");
+
+            var articles = _context.ArticlesClasses
+                .Include(a => a.FamillesClass)
+                .Include(a => a.FournisseursClass)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                articles = articles.Where(a => a.Name.Contains(searchName));
+                ViewData["searchName"] = searchName;
+            }
+
+            if (familleId.HasValue && familleId.Value > 0)
+            {
+                articles = articles.Where(a => a.FamillesClassId == familleId.Value);
+            }
+
+            return View(await articles.ToListAsync());
         }
+
+        public async Task<IActionResult> FilterArticles(string searchName, int? familleId, int? minPrice, int? maxPrice)
+        {
+            var articles = _context.ArticlesClasses
+                .Include(a => a.FamillesClass)
+                .Include(a => a.FournisseursClass)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchName))
+            {
+                articles = articles.Where(a => a.Name.Contains(searchName));
+            }
+
+            if (familleId.HasValue && familleId.Value > 0)
+            {
+                articles = articles.Where(a => a.FamillesClassId == familleId.Value);
+            }
+
+            if (minPrice.HasValue)
+            {
+                articles = articles.Where(a => a.UnitPrice >= minPrice.Value);
+            }
+            if (maxPrice.HasValue)
+            {
+                articles = articles.Where(a => a.UnitPrice <= maxPrice.Value);
+            }
+
+            return PartialView("_ArticleCards", await articles.ToListAsync());
+        }
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)

@@ -2,6 +2,8 @@
 
 @if (Model != null && Model.LigneCommandeClientsClass != null && Model.LigneCommandeClientsClass.Count > 0)
 {
+    decimal total = 0;
+
     <table class="table">
         <thead>
             <tr>
@@ -15,6 +17,9 @@
         <tbody>
             @foreach (var ligne in Model.LigneCommandeClientsClass)
             {
+                decimal sousTotal = ligne.PrixUnitaire * ligne.Quantite;
+                total += sousTotal;
+
                 <tr>
                     <td>@ligne.ArticlesClass.Name</td>
                     <td>
@@ -25,7 +30,7 @@
                         </form>
                     </td>
                     <td>@ligne.PrixUnitaire €</td>
-                    <td>@(ligne.PrixUnitaire * ligne.Quantite) €</td>
+                    <td>@sousTotal €</td>
                     <td>
                         <form asp-action="SupprimerDuPanier" method="post">
                             <input type="hidden" name="ligneCommandeId" value="@ligne.Id" />
@@ -38,10 +43,13 @@
     </table>
 
     <div>
+        <h3>Total : @total €</h3>
+    </div>
+
+    <div>
         <a class="btn btn-success" asp-action="ValiderCommande">Valider la commande</a>
     </div>
 }
-
 else
 {
     <p>Votre panier est vide.</p>
