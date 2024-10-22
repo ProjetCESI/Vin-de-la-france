@@ -16,7 +16,7 @@ namespace VinWpf
             string username = UsernameTextBox.Text;
             string password = PasswordBox.Password;
 
-            if (username == "timeo" && password == "blondeleau")
+            if (username == "admin" && password == "admin")
             {
                 LoginSuccessful?.Invoke(this, EventArgs.Empty);
                 this.Close();

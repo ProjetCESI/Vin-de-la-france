@@ -60,13 +60,6 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            @if (Context.Session.GetString("ClientId") == null)
-            {
-                <div class="alert alert-danger">
-                    Veuillez vous connecter pour accéder à cette section du site.
-                </div>
-            }
-
             @RenderBody()
         </main>
     </div>

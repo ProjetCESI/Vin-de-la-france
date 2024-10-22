@@ -208,3 +208,11 @@ body {
     font-weight: bold;
     margin: 0;
 }
+
+#articleContainer {
+    margin-top: 20px;
+}
+
+.form-group, inut {
+    text-align: center;
+}

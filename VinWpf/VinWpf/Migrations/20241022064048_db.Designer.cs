@@ -12,7 +12,7 @@ using VinWpf.DataSet;
 namespace VinWpf.Migrations
 {
     [DbContext(typeof(VinContext))]
-    [Migration("20241021120444_db")]
+    [Migration("20241022064048_db")]
     partial class db
     {
         /// <inheritdoc />
